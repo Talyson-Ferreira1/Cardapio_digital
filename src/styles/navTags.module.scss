@@ -1,0 +1,70 @@
+@import '../app/globals.scss';
+
+.container_tags {
+  @include full-size;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 3rem 1rem 1rem 1rem;
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(196, 193, 193, 0.589);
+    border-radius: 50px;
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(143, 140, 140, 0.589);
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+}
+
+.tag_button {
+  @include button-style;
+  @include center-evenly;
+  width: auto;
+  height: 3rem;
+  min-width: 150px;
+  background-color: $cor-primaria;
+  transition: all 0.4s;
+}
+
+.container_loader_tags {
+  @include center-around;
+  @include center-rows;
+
+  span {
+    font-size: 0.8rem;
+  }
+
+  div {
+    width: 25px;
+    height: 25px;
+    animation: rot1 1.2s linear infinite;
+  }
+}
+
+@keyframes rot1 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 720px) {
+  .container_tags {
+    justify-content: center;
+  }
+}

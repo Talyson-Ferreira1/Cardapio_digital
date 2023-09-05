@@ -1,0 +1,6 @@
+@import 'globals';
+
+.main {
+  @include center-column;
+  @include size-heigth-auto;
+}

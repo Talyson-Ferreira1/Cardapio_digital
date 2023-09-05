@@ -1,0 +1,137 @@
+@import '../app/globals.scss';
+
+.container {
+  @include size-heigth-auto;
+  padding: 3rem 0 0 0;
+}
+
+.form {
+  @include size-heigth-auto;
+  @include center-column;
+  padding: 0 0 2rem 0;
+  gap: 1rem;
+
+  label {
+    cursor: pointer;
+
+    &:focus {
+      border: 2px solid $gray-color-2;
+    }
+  }
+}
+
+.form input:hover + label {
+  transform: scale(1.01);
+}
+
+.image_product {
+  @include center-column;
+  min-height: 200px;
+  height: 250px;
+  width: 95vw;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  background-color: $gray-color-3;
+  border: 1px solid $gray-color-2;
+  border-radius: 10px;
+
+  div {
+    @include center-column;
+    @include full-size;
+  }
+
+  input {
+    @include absolute-init;
+    position: absolute;
+    cursor: pointer;
+    opacity: 0;
+  }
+}
+
+.category_product {
+  width: 95vw;
+  height: 4rem;
+  border-radius: 20px;
+  border: 1px solid $gray-color-3;
+  background: transparent;
+  font-size: 1rem;
+  padding-left: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    background: $gray-color-4;
+  }
+
+  &:focus {
+    outline: 1px solid $gray-color-2;
+  }
+}
+.height_product,
+.price_product,
+.description_product,
+.name_product {
+  @include init-column;
+  width: 95vw;
+  height: 4rem;
+  border-radius: 20px;
+  border: 1px solid $gray-color-3;
+  position: relative;
+  overflow: hidden;
+
+  input {
+    @include absolute-init;
+    position: absolute;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding-left: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+
+    &:hover {
+      background: $gray-color-4;
+    }
+  }
+
+  span {
+    padding-left: 1rem;
+    transition: all 0.5s;
+  }
+
+  input:is(:valid, :focus) + span {
+    transform: translateY(-3rem);
+  }
+}
+
+.submit {
+  width: 95vw;
+  height: 4rem;
+  background-color: $cor-primaria;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+}
+
+.error {
+  padding-left: 1rem;
+  width: 95%;
+  height: 1rem;
+  font-size: 0.8rem;
+  color: red;
+  font-weight: 400;
+}
+
+.image_uploaded {
+  img {
+    width: auto;
+    height: 100%;
+  }
+}

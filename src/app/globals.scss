@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+$cor-primaria: #eabf16;
+
+$gray-color-1: rgba(39, 39, 39, 0.697);
+$gray-color-2: rgb(109, 109, 109);
+$gray-color-3: rgba(150, 150, 150, 0.52);
+$gray-color-4: rgba(197, 197, 197, 0.141);
+$gray-color-5: rgb(48, 48, 48);
+$gray-color-6: #60696b;
+
+$green-color-1: rgb(5, 126, 5);
+
+$color-name-product: rgb(77, 77, 77);
+$color-description-product: rgb(100, 100, 100);
+$color-price-product: rgb(5, 126, 5);
+
+$red-color-1: rgb(240, 62, 62);
+$red-color-2: rgb(249, 72, 72);
+
+$eskeleton-color: rgb(248, 248, 248);
+
+$size-header: 200px;
+$size-page: calc(100vh - 200px);
+
+$clamp-name: clamp(10px, 0.8vw, 20px);
+$clamp-description: clamp(8px, 0.6vw, 12px);
+$clamp-price: clamp(10px, 0.9vw, 22px);
+
+$clamp-vertical-name: clamp(12px, 1.5vw, 28px);
+
+$box-shadow-1:
+  0.7px 1.3px 2.2px rgba(0, 0, 0, 0.02),
+  1.8px 3.1px 5.3px rgba(0, 0, 0, 0.028),
+  3.4px 5.8px 10px rgba(0, 0, 0, 0.035),
+  6px 10.3px 17.9px rgba(0, 0, 0, 0.042),
+  11.3px 19.2px 33.4px rgba(0, 0, 0, 0.05),
+  27px 46px 80px rgba(0, 0, 0, 0.07);
+
+@mixin rounded-edge {
+  border-radius: 20px;
+}
+
+/* ------------------ tags styles ------------------*/
+
+@mixin button-style {
+  border-radius: 20px;
+  border: none;
+  color: white;
+  font-weight: 700;
+  font-size: large;
+  padding: 1rem;
+  cursor: pointer;
+  box-shadow: 4px 4px 9px 1px rgba(0, 0, 0, 0.29);
+  -webkit-box-shadow: 4px 4px 9px 1px rgba(0, 0, 0, 0.29);
+  -moz-box-shadow: 4px 4px 9px 1px rgba(0, 0, 0, 0.29);
+
+  &:hover,
+  &:focus {
+    transform: scale(1.03);
+  }
+}
+
+@mixin buttons-header {
+  position: absolute;
+  top: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  border-radius: 10px;
+  z-index: 2;
+  cursor: pointer;
+  border: 1px solid $gray-color-3;
+  box-shadow: $box-shadow-1;
+  transition: all 0.3s;
+
+  &:focus {
+    outline: 2px solid $gray-color-3;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+/* ------------------ measures ------------------*/
+
+@mixin full-size {
+  width: 100%;
+  height: 100%;
+}
+
+@mixin full-view-size {
+  width: 100vw;
+  height: calc(100vh - $size-header);
+}
+
+@mixin text-card {
+  align-self: center;
+  margin: 0 1rem;
+}
+
+@mixin full-width {
+  width: 100vw;
+}
+
+@mixin size-heigth-auto {
+  width: 100vw;
+  height: auto;
+}
+
+@mixin init-column {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@mixin center-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@mixin center-rows {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin center-around {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+@mixin center-evenly {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+/* ------------------ positions ------------------*/
+
+@mixin absolute-center-X {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@mixin absolute-init {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ------------------ class layout ------------------*/
+
+.reset-html {
+  overflow-x: hidden;
+}
+
+.reset-styles {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 100vw;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+
+  color: black;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(196, 193, 193, 0.589);
+    border-radius: 50px;
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(143, 140, 140, 0.589);
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+}
+
+.header-layout {
+  @include center_column;
+  @include full_width;
+  height: $size-header;
+  background-color: $cor-primaria;
+  position: relative;
+}
+
+@media (max-width: 715px) {
+  .reset-styles a {
+    @include center-rows;
+    width: 100%;
+  }
+}

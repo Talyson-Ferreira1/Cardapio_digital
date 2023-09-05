@@ -1,0 +1,195 @@
+@import '../app/globals.scss';
+
+.container {
+  @include center-rows;
+  @include full-view-size;
+}
+
+.spinner_null_page {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  border: 4px solid #0000;
+  border-radius: 50%;
+  border-right-color: $cor-primaria;
+  animation: spinner-a4dj62 1s infinite linear;
+}
+
+.spinner_null_page::before,
+.spinner_null_page::after {
+  content: '';
+  grid-area: 1/1;
+  margin: 2px;
+  border: inherit;
+  border-radius: 50%;
+  animation: spinner-a4dj62 2s infinite;
+}
+
+.spinner_null_page::after {
+  margin: 8px;
+  animation-duration: 3s;
+}
+
+@keyframes spinner-a4dj62 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+/* ------------------ Style of Loading horizontal component ------------------ */
+
+.container_loading_horizontal {
+  border-radius: 20px;
+
+  background: white;
+  width: 250px;
+  height: 200px;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 60% 40%;
+  box-shadow: 4px 4px 9px 1px rgba(0, 0, 0, 0.29);
+  overflow: hidden;
+  padding-bottom: 0.5rem;
+
+  .loading_img {
+    background: rgb(248, 248, 248);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .loading_info {
+    @include full-size;
+    display: grid;
+    grid-template-columns: 90%;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 2px;
+    padding: 0.5rem 1rem;
+
+    .eskeleton {
+      height: 1.5rem;
+      width: 100%;
+      position: relative;
+      background: $eskeleton-color;
+      overflow: hidden;
+      border-radius: 5px;
+      box-shadow: 10px 10px 31px -17px rgba(0, 0, 0, 0.75);
+      -webkit-box-shadow: 10px 10px 31px -17px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 10px 10px 31px -17px rgba(0, 0, 0, 0.75);
+    }
+  }
+}
+
+.loading_img::after,
+.loading_info div::after {
+  @include absolute-init;
+  content: '';
+  position: absolute;
+  background: linear-gradient(
+    110deg,
+    rgba(227, 227, 227, 0) 0%,
+    rgba(227, 227, 227, 0) 40%,
+    rgba(227, 227, 227, 0.5) 50%,
+    rgba(227, 227, 227, 0) 60%,
+    rgba(227, 227, 227, 0) 100%
+  );
+  animation: gradient-animation 0.8s linear infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ------------------ Style of Loading component ------------------ */
+
+.container_card_eskeleton {
+  width: 100%;
+  position: relative;
+  max-width: 50rem;
+  height: 130px;
+  display: grid;
+  grid-template-columns: 35% 65%;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0 1rem;
+  padding: 0.5rem;
+  overflow: hidden;
+  border-radius: 15px;
+  transition: all 0.5s;
+  box-shadow: 4px 4px 9px 1px rgba(0, 0, 0, 0.29);
+  -webkit-box-shadow: 4px 4px 9px 1px rgba(0, 0, 0, 0.29);
+}
+
+.container_image_eskeleton {
+  @include rounded-edge;
+  @include full-size;
+  grid-column: 1;
+  grid-row: span 3;
+  box-shadow: 10px 10px 59px -25px rgba(0, 0, 0, 0.75);
+  position: relative;
+  overflow: hidden;
+  background-color: $eskeleton-color;
+}
+
+.eskeleton_1,
+.eskeleton_2,
+.eskeleton_3 {
+  height: 2rem;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  background-color: $eskeleton-color;
+}
+
+.eskeleton_1 {
+  width: 60%;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.eskeleton_2 {
+  width: 90%;
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.eskeleton_3 {
+  width: 50%;
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.container_image_eskeleton::after,
+.eskeleton_1::after,
+.eskeleton_2::after,
+.eskeleton_3::after {
+  @include absolute-init;
+  content: '';
+  position: absolute;
+  background: linear-gradient(
+    110deg,
+    rgba(227, 227, 227, 0) 0%,
+    rgba(227, 227, 227, 0) 40%,
+    rgba(227, 227, 227, 0.5) 50%,
+    rgba(227, 227, 227, 0) 60%,
+    rgba(227, 227, 227, 0) 100%
+  );
+  animation: gradient-animation 0.8s linear infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}

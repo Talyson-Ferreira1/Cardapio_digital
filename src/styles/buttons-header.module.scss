@@ -1,0 +1,13 @@
+@import '../app/globals.scss';
+
+.button_home_style {
+  @include buttons-header;
+  background: transparent;
+  left: 2rem;
+}
+
+.button_return_style {
+  @include buttons-header;
+  background: transparent;
+  left: 2rem;
+}

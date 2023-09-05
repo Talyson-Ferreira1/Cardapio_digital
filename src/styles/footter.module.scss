@@ -1,0 +1,21 @@
+@import '../app/globals.scss';
+
+.footer {
+  @include center-column;
+  width: 100vw;
+  height: 150px;
+  background-color: $gray-color-5;
+  border-top: 2px solid $cor-primaria;
+  color: white;
+  gap: 0.5rem;
+
+  a {
+    cursor: pointer;
+  }
+
+  button {
+    @include button-style;
+    width: 100px;
+    background-color: $gray-color-3;
+  }
+}

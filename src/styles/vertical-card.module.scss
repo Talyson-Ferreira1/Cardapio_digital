@@ -1,0 +1,51 @@
+@import '../app/globals.scss';
+
+.container_product {
+  width: 100%;
+  height: 130px;
+  max-width: 50rem;
+  display: grid;
+  grid-template-columns: 35% 65%;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0 0.5rem;
+  overflow: hidden;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 4px 4px 9px 1px rgba(0, 0, 0, 0.29);
+  -webkit-box-shadow: 4px 4px 9px 1px rgba(0, 0, 0, 0.29);
+
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  div {
+    @include center-rows;
+    @include rounded-edge;
+    grid-row: span 3;
+    background: white;
+    overflow: hidden;
+    box-shadow: 10px 10px 59px -25px rgba(0, 0, 0, 0.75);
+    margin: 0.5rem;
+    position: relative;
+  }
+
+  h2 {
+    @include text-card;
+    font-size: $clamp-vertical-name;
+    color: $gray-color-1;
+  }
+
+  p {
+    @include text-card;
+    color: $gray-color-2;
+    font-size: $clamp-description;
+    flex-wrap: wrap;
+    font-weight: 500;
+  }
+
+  h3 {
+    @include text-card;
+    color: $green-color-1;
+  }
+}
