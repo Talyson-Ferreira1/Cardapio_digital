@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
-import styles from '../../styles/buttons-header.module.scss'
+import styles from '@/styles/buttons-header.module.scss'
 
 export default function ReturnToLastPage() {
   const route = useRouter()

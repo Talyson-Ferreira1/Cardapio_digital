@@ -29,6 +29,12 @@ $clamp-price: clamp(10px, 0.9vw, 22px);
 
 $clamp-vertical-name: clamp(12px, 1.5vw, 28px);
 
+$gradient-1: linear-gradient(
+  90deg,
+  hsla(213, 77%, 14%, 1) 0%,
+  hsla(202, 27%, 45%, 1) 100%
+);
+
 $box-shadow-1:
   0.7px 1.3px 2.2px rgba(0, 0, 0, 0.02),
   1.8px 3.1px 5.3px rgba(0, 0, 0, 0.028),
@@ -154,6 +160,12 @@ $box-shadow-1:
   height: 100%;
 }
 
+@mixin absolute-right {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
 /* ------------------ class layout ------------------*/
 
 .reset-html {
@@ -165,6 +177,7 @@ $box-shadow-1:
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
+  position: relative;
   width: 100vw;
   min-height: 100vh;
   padding: 0;

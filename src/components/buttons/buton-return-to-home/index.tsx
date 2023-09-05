@@ -2,7 +2,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import styles from '../../styles/buttons-header.module.scss'
+import styles from '@/styles/buttons-header.module.scss'
 
 export default function ReturnToHome() {
   const route = useRouter()

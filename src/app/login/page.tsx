@@ -14,6 +14,7 @@ import Image from 'next/image'
 export default function Login() {
   const [user, setUser] = useState<User | null>()
   const [permissionDenied, setPermissionDenied] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   const router = useRouter()
 
   const FetchLoginUser = (data: any) => {
@@ -80,33 +81,60 @@ export default function Login() {
             </div>
 
             {permissionDenied && (
-              <span className={styles.error}>
-                Você não tem permissão de acesso
-              </span>
+              <p className={styles.warning}>
+                Você não tem permissão de acesso.
+              </p>
             )}
-            <label htmlFor="email">Email:</label>
-            <Field
-              type="email"
-              name="email"
-              placeholder="Digite seu email"
-              required
-            ></Field>
+            <label htmlFor="email">
+              Email:
+              <Field
+                type="email"
+                name="email"
+                placeholder="Digite seu email"
+                required
+              />
+            </label>
             <ErrorMessage
               className={styles.error}
               name="email"
-              component="div"
+              component="span"
             />
-            <label htmlFor="password">Senha:</label>
-            <Field
-              type="password"
-              name="password"
-              placeholder="Digite sua senha"
-              required
-            ></Field>
+
+            <label htmlFor="password">
+              Senha:
+              <Field
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                placeholder="Digite sua senha"
+                required
+              />
+              {
+                <button
+                  className={styles.show_password}
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? (
+                    <Image
+                      src="/icons/eye-closed.svg"
+                      alt="show password"
+                      width="20"
+                      height="20"
+                    />
+                  ) : (
+                    <Image
+                      src="/icons/eye-open.svg"
+                      alt="show password"
+                      width="20"
+                      height="20"
+                    />
+                  )}
+                </button>
+              }
+            </label>
             <ErrorMessage
               className={styles.error}
               name="password"
-              component="div"
+              component="span"
             />
             <Field
               className={styles.submit}

@@ -4,7 +4,7 @@
   @include center-rows;
   width: 100vw;
   height: $size-page;
-  padding: 2rem 0 0 0;
+  padding: 2rem 2rem 0 2rem;
   overflow: hidden;
 
   background: #141e30; /* fallback for old browsers */
@@ -26,22 +26,21 @@
 }
 
 .container {
-  width: 400px;
-  height: 60vh;
-  min-width: 300px;
+  width: 25rem;
+  max-width: 400px;
+  max-height: 450px;
+  min-height: 370px;
+
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 1rem;
+  position: relative;
+  padding: 0 1rem;
   gap: 1rem;
   overflow: hidden;
   border-radius: 30px;
-  background: linear-gradient(
-    90deg,
-    hsla(213, 77%, 14%, 1) 0%,
-    hsla(202, 27%, 45%, 1) 100%
-  );
+  background: $gradient-1;
   color: white;
   border: 1px solid $gray-color-3;
 
@@ -52,17 +51,29 @@
   }
 
   label {
+    width: 100%;
     color: white;
     font-size: 0.8rem;
     font-weight: 600;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  span {
+    width: 100%;
+    font-size: 0.8rem;
+    color: $red-color-1;
+    animation: shake 0.5s ease-in-out;
   }
 
   input {
-    width: 95%;
+    width: 24rem;
     height: 3rem;
+    padding-left: 1rem;
     border-radius: 5px;
     border: none;
-    padding: 0 1rem;
     text-justify: center;
 
     &:focus {
@@ -71,10 +82,27 @@
   }
 }
 
+.warning {
+  width: 100%;
+  font-size: 0.8rem;
+  animation: shake 0.5s ease-in-out;
+  text-align: center;
+  color: white;
+}
+
 .ilustration {
   @include center-rows;
   width: 100%;
   height: 100px;
+}
+
+.show_password {
+  @include absolute-right;
+  @include center-rows;
+  border: 0;
+  background: transparent;
+  width: 3rem;
+  height: 3rem;
 }
 
 .submit {
@@ -91,7 +119,28 @@
   }
 }
 
-.error {
-  font-size: 0.7rem;
-  color: $red-color-1;
+@keyframes shake {
+  0% {
+    transform: translateX(-0.5rem);
+  }
+
+  20% {
+    transform: translateX(0.5rem);
+  }
+
+  40% {
+    transform: translateX(-0.5rem);
+  }
+
+  60% {
+    transform: translateX(0.5rem);
+  }
+
+  80% {
+    transform: translateX(-0.5rem);
+  }
+
+  100% {
+    transform: translateX(0.5rem);
+  }
 }

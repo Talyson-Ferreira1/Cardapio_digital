@@ -11,3 +11,29 @@
   background: transparent;
   left: 2rem;
 }
+
+.button_go_to_dashboard {
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  top: 10rem;
+  right: 2rem;
+  background-color: $cor-primaria;
+  border-radius: 10px;
+  color: white;
+  font-weight: 800;
+  border: 1px solid $gray-color-3;
+  box-shadow: $box-shadow-1;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+}
+
+.button_open_bag_shopping {
+  @include buttons-header;
+  background: transparent;
+
+  right: 2rem;
+}

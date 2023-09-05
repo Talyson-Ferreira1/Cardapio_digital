@@ -1,11 +1,13 @@
 @import '../app/globals.scss';
 
 .container_tags {
-  @include full-size;
+  /*   @include full-size;
+ */
   display: flex;
+  width: 100vw;
   align-items: center;
   gap: 2rem;
-  padding: 3rem 1rem 1rem 1rem;
+  padding: 3rem 1rem 1rem 2rem;
   overflow-x: auto;
 
   &::-webkit-scrollbar {

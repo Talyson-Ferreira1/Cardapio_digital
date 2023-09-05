@@ -10,10 +10,13 @@ import Header from '@/components/header'
 import './globals.scss'
 import TagsHeader from '@/components/nav'
 import Footer from '@/components/footer/index'
-import ReturnToHome from '@/components/buton-return-to-home'
+import ReturnToHome from '@/components/buttons/buton-return-to-home'
 import { hasButtonHome } from '@/functions/check-if-it-accepts-the-home-button'
 import { hasButtonReturn } from '@/functions/check-if-it-accepts-the-return-button'
-import ReturnToLastPage from '@/components/button-return'
+import ReturnToLastPage from '@/components/buttons/button-return'
+import checkIsUserAuthenticated from '@/functions/check-is-user-authenticated'
+import GoToDashboard from '@/components/buttons/button-go-to-dashboard'
+import ButtonOpenBagShopping from '@/components/buttons/button-open-bag-shopping'
 
 require('dotenv').config()
 
@@ -27,6 +30,8 @@ export default function RootLayout({
   const acceptsButtonHome = hasButtonHome(pathName)
   const acceptsButtonReturn = hasButtonReturn(pathName)
   const isLoginPage = pathName === '/login' ? true : false
+  const isDashboardPage = pathName === '/dashboard' ? true : false
+  const userAuthenticated = checkIsUserAuthenticated()
 
   return (
     <Providers>
@@ -36,6 +41,8 @@ export default function RootLayout({
             <Header />
             {acceptsButtonHome && <ReturnToHome />}
             {acceptsButtonReturn && <ReturnToLastPage />}
+            {userAuthenticated && !isDashboardPage && <GoToDashboard />}
+            {isPublicPage && <ButtonOpenBagShopping />}
           </header>
           {isPublicPage && !isLoginPage && <TagsHeader />}
 
