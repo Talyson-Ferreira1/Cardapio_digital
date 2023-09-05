@@ -11,6 +11,7 @@ export default function Footer() {
   const [showLogin, setShowLogin] = useState(true)
   const route = useRouter()
   const pathName = usePathname()
+  const isLoginPage = pathName === '/login' ? false : true
 
   async function UserLogOut() {
     await LogOut()
@@ -48,10 +49,14 @@ export default function Footer() {
       <div></div>
       <div>Link do desenvolvedor</div>
       <div>copyright</div>
-      {showLogin ? (
-        <button onClick={UserLogin}>LogIn</button>
-      ) : (
-        <button onClick={UserLogOut}>LogOut</button>
+      {isLoginPage && (
+        <>
+          {showLogin ? (
+            <button onClick={UserLogin}>LogIn</button>
+          ) : (
+            <button onClick={UserLogOut}>LogOut</button>
+          )}
+        </>
       )}
     </footer>
   )

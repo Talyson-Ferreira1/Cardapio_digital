@@ -11,12 +11,16 @@ import './globals.scss'
 import TagsHeader from '@/components/nav'
 import Footer from '@/components/footer/index'
 import ReturnToHome from '@/components/buttons/buton-return-to-home'
-import { hasButtonHome } from '@/functions/check-if-it-accepts-the-home-button'
-import { hasButtonReturn } from '@/functions/check-if-it-accepts-the-return-button'
 import ReturnToLastPage from '@/components/buttons/button-return'
 import checkIsUserAuthenticated from '@/functions/check-is-user-authenticated'
 import GoToDashboard from '@/components/buttons/button-go-to-dashboard'
 import ButtonOpenBagShopping from '@/components/buttons/button-open-bag-shopping'
+import { acceptsButton } from '@/functions/check-routes'
+import { bag_button_routes } from '@/constants/app-routes-bag-button'
+import { return_button_routes } from '@/constants/app-routes-return-button'
+import { home_button_routes } from '@/constants/app-router-home-button'
+import { tags_button_routes } from '@/constants/app-router-tags-button'
+import { footer_routes } from '@/constants/app-router-footer'
 
 require('dotenv').config()
 
@@ -27,11 +31,33 @@ export default function RootLayout({
 }) {
   const pathName = usePathname()
   const isPublicPage = checkIsPublicRoute(pathName)
-  const acceptsButtonHome = hasButtonHome(pathName)
-  const acceptsButtonReturn = hasButtonReturn(pathName)
-  const isLoginPage = pathName === '/login' ? true : false
   const isDashboardPage = pathName === '/dashboard' ? true : false
   const userAuthenticated = checkIsUserAuthenticated()
+
+  const acceptsBagButton = acceptsButton({
+    asPath: pathName,
+    routes: bag_button_routes,
+  })
+
+  const acceptsReturnButton = acceptsButton({
+    asPath: pathName,
+    routes: return_button_routes,
+  })
+
+  const acceptsHomeButton = acceptsButton({
+    asPath: pathName,
+    routes: home_button_routes,
+  })
+
+  const acceptsTagsButton = acceptsButton({
+    asPath: pathName,
+    routes: tags_button_routes,
+  })
+
+  const acceptsFooter = acceptsButton({
+    asPath: pathName,
+    routes: footer_routes,
+  })
 
   return (
     <Providers>
@@ -39,16 +65,17 @@ export default function RootLayout({
         <body className="reset-styles">
           <header className="header-layout">
             <Header />
-            {acceptsButtonHome && <ReturnToHome />}
-            {acceptsButtonReturn && <ReturnToLastPage />}
+
+            {acceptsReturnButton && <ReturnToLastPage />}
+            {acceptsBagButton && <ButtonOpenBagShopping />}
+            {acceptsHomeButton && <ReturnToHome />}
             {userAuthenticated && !isDashboardPage && <GoToDashboard />}
-            {isPublicPage && <ButtonOpenBagShopping />}
           </header>
-          {isPublicPage && !isLoginPage && <TagsHeader />}
+          {acceptsTagsButton && <TagsHeader />}
 
           {isPublicPage && children}
           {!isPublicPage && <PrivateRoute>{children}</PrivateRoute>}
-          <Footer />
+          {acceptsFooter && <Footer />}
         </body>
       </html>
     </Providers>

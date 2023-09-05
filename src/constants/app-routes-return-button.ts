@@ -1,4 +1,4 @@
-export const RETURN_BUTTON_ROUTES = {
+export const return_button_routes = {
   hasButton: {
     sacola: '/sacola',
     produto: '/produto',

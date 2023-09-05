@@ -1,18 +1,18 @@
-export const HOME_BUTTON_ROUTES = {
+export const tags_button_routes = {
   hasButton: {
-    dashboard: '/dashboard',
+    home: '/',
     bebidas: '/bebidas',
-    login: '/login',
-    porcoes: '/porcoes',
     refeicoes: '/refeicoes',
+    porcoes: '/porcoes',
     sobremesas: '/sobremesas',
+    buscar: '/buscar',
   },
 
   noButton: {
-    home: '/',
-    sacola: '/sacola',
-    produto: '/produto',
-    buscar: '/buscar',
+    dashboard: { name: '/dashboard' },
+    login: { name: '/login' },
+    sacola: { name: '/sacola' },
+    produto: { name: '/produto' },
     cadastrar: { name: '/cadastrar-produto' },
     editar: { name: '/editar-produto' },
     delete: { name: '/deletar-produto' },
