@@ -15,5 +15,17 @@ interface props {
 export const acceptsButton = ({ asPath, routes }: props) => {
   const appPublicRoute = Object.values(routes.hasButton)
 
-  return appPublicRoute.includes(asPath)
+  let lettersOfPath = asPath.split('')
+  let counter = 0
+  let newPath: Array<string> = []
+
+  lettersOfPath.map((letter) => {
+    if (counter > 1) return
+    newPath.push(letter)
+    if (letter === '/') counter++
+  })
+
+  let path = newPath.join('')
+
+  return appPublicRoute.includes(path)
 }

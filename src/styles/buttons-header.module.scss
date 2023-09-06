@@ -13,6 +13,8 @@
 }
 
 .button_go_to_dashboard {
+  @include center-column;
+  gap: 0.5rem;
   position: absolute;
   width: 5rem;
   height: 5rem;
@@ -34,6 +36,5 @@
 .button_open_bag_shopping {
   @include buttons-header;
   background: transparent;
-
   right: 2rem;
 }

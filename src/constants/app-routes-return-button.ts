@@ -1,7 +1,7 @@
 export const return_button_routes = {
   hasButton: {
     sacola: '/sacola',
-    produto: '/produto',
+    produto: '/produto/',
     buscar: '/buscar',
     cadastrar: '/cadastrar-produto',
     editar: '/editar-produto',
