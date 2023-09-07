@@ -11,6 +11,10 @@ $gray-color-6: #60696b;
 
 $green-color-1: rgb(5, 126, 5);
 
+$blur-color-1: rgba(234, 234, 234, 0.697);
+$blur-color-2: rgba(217, 217, 217, 0.697);
+$blur-color-3: rgba(234, 234, 234, 0.697);
+
 $orange-warning: orange;
 
 $color-name-product: rgb(77, 77, 77);
@@ -47,6 +51,10 @@ $box-shadow-1:
 
 @mixin rounded-edge {
   border-radius: 20px;
+}
+
+@mixin rounded-edge-2 {
+  border-radius: 10px;
 }
 
 /* ------------------ tags styles ------------------*/
