@@ -9,7 +9,7 @@ interface Props {
 
 export default function ButtonDashBoard({ href, name }: Props) {
   return (
-    <Link href={`/${href}`}>
+    <Link href={`/dashboard/${href}`}>
       <button className={styles.button}>{name}</button>
     </Link>
   )

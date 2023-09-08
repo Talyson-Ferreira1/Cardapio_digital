@@ -55,5 +55,3 @@ export default function Home() {
     </>
   )
 }
-
-// Descobrir porque ele não esta pegando 100 da viewport

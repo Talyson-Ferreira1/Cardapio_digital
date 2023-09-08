@@ -38,3 +38,197 @@
     transform: scale(1.01);
   }
 }
+
+/* --------------------------- Edit Product Styles --------------------------- */
+
+.main {
+  width: 100vw;
+  height: auto;
+  min-height: calc(100vh - $size-header);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-rows: auto;
+  justify-items: center;
+  gap: 2rem 1rem;
+  color: black;
+  padding: 100px 1rem 1rem 1rem;
+  position: relative;
+}
+
+.card_product {
+  width: 200px;
+  height: auto;
+  border: 1px solid $gray-color-3;
+  border-radius: 10px;
+  padding: 1rem;
+  background: $blur-color-3;
+  transition: all 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+}
+
+.delete_product_button {
+  width: 100%;
+  height: 2rem;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  background: $red-color-1;
+  font-weight: 700;
+  opacity: 0.8;
+  cursor: pointer;
+  color: white;
+
+  &:hover {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+.image {
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.name {
+  font-size: 0.9rem;
+}
+
+.description {
+  font-size: 0.9rem;
+}
+
+.price {
+  font-size: 0.9rem;
+}
+
+.weight {
+  font-size: 0.9rem;
+}
+
+.category {
+  font-size: 0.9rem;
+}
+
+.available {
+  font-size: 0.9rem;
+}
+
+.order_only {
+  font-size: 0.9rem;
+}
+
+.filter_input {
+  height: 3rem;
+  width: 10vw;
+  position: absolute;
+  top: 1rem;
+}
+
+/* --------------------------- modal styles --------------------------- */
+
+.container_modal {
+  @include absolute-center;
+  @include center-column;
+  width: 100%;
+  height: 100%;
+  background: $blur-color-1;
+  z-index: 5;
+}
+
+.modal {
+  @include center-column;
+  width: auto;
+  height: auto;
+  max-height: 800px;
+  min-height: 300px;
+  max-width: 900px;
+  min-width: 250px;
+  background: white;
+  position: relative;
+  padding: 1rem;
+  gap: 1rem;
+  border-radius: 10px;
+
+  h2 {
+    font-size: $clamp-name;
+  }
+
+  p {
+    font-size: $clamp-description;
+    text-align: center;
+    color: $text-color-1;
+  }
+}
+
+.delete {
+  background: $red-warning-3;
+  border: 1px solid $gray-color-3;
+  border-radius: 5px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  width: 100%;
+  height: 3rem;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+}
+
+.cancel {
+  border: 1px solid $gray-color-3;
+  border-radius: 5px;
+  width: 100%;
+  height: 3rem;
+  background-color: transparent;
+  color: $text-color-1;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+}
+
+.close_modal {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  right: -5px;
+  top: -5px;
+  border-radius: 50%;
+  border: none;
+  background-color: $red-color-1;
+  color: white;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.ilustration {
+  @include center-rows;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: $red-warning-2;
+}
+/*   
+  image: string
+  name: string
+  description: string
+  price: number
+  weight: number 
+  category: string
+  available: boolean
+  order_only: boolean
+  
+  id: string
+  stars: number
+  daily_menu: boolean
+  */

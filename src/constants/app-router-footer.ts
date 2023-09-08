@@ -10,6 +10,7 @@ export const footer_routes = {
     buscar: '/buscar',
     menu: '/cardapio-do-dia',
     cadastrar: '/cadastrar-produto',
+    editarProduto: '/editar-produto/',
     editar: '/editar-produto',
     delete: '/deletar-produto',
   },

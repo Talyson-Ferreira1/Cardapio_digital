@@ -10,7 +10,7 @@ import { getFirestore, collection, setDoc, doc } from 'firebase/firestore'
 import { ToastContainer, toast } from 'react-toastify'
 import { GenerateRandomId } from '@/functions/generate-random-id'
 
-import styles from '../../styles/cadastrar.module.scss'
+import styles from '@/styles/cadastrar.module.scss'
 import 'react-toastify/dist/ReactToastify.css'
 
 interface DataImage {

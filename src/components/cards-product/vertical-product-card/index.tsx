@@ -1,12 +1,12 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import styles from '../../styles/vertical-card.module.scss';
+import styles from '@/styles/vertical-card.module.scss'
 
 interface ProductProps {
-  productImage: string;
-  productName: string;
-  productDescription: string;
-  productPrice: string;
+  productImage: string
+  productName: string
+  productDescription: string
+  productPrice: string
 }
 
 export default function VerticalProduct({
@@ -31,5 +31,5 @@ export default function VerticalProduct({
       <p>{productDescription}</p>
       <h3>{productPrice}</h3>
     </div>
-  );
+  )
 }

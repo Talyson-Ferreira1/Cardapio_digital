@@ -1,22 +1,22 @@
-export const bag_button_routes = {
+export const bar_search_routes = {
   hasButton: {
     home: '/',
+    dashboard: '/dashboard',
     bebidas: '/bebidas',
+    login: '/login',
     porcoes: '/porcoes',
     refeicoes: '/refeicoes',
     sobremesas: '/sobremesas',
+    sacola: '/sacola',
+    produto: '/produto',
     buscar: '/buscar',
+    cadastrar: { name: '/cadastrar-produto' },
   },
 
   noButton: {
-    login: { name: '/login' },
-    dashboard: { name: '/dashboard' },
-    sacola: { name: '/sacola' },
-    produto: { name: '/produto' },
-    cadastrar: { name: '/cadastrar-produto' },
+    menu: { name: '/cardapio-do-dia' },
     editarProduto: { name: '/editar-produto/' },
     editar: { name: '/editar-produto' },
     delete: { name: '/deletar-produto' },
-    menu: { name: '/cardapio-do-dia' },
   },
 }

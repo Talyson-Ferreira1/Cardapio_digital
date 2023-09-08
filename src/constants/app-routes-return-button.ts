@@ -3,10 +3,10 @@ export const return_button_routes = {
     sacola: '/sacola',
     produto: '/produto/',
     buscar: '/buscar',
-    cadastrar: '/cadastrar-produto',
-    editar: '/editar-produto',
-    delete: '/deletar-produto',
-    menu: '/cardapio-do-dia',
+    cadastrar: '/dashboard/cadastrar-produto',
+    editar: '/dashboard/editar-produto',
+    delete: '/dashboard/deletar-produto',
+    menu: '/dashboard/cardapio-do-dia',
   },
 
   noButton: {

@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 
 import { Providers } from '@/context'
 import { checkIsPublicRoute } from '@/functions/check-is-public-route'
-import { acceptsButton } from '@/functions/check-routes'
+import { acceptsButton, acceptsButtonDashboard } from '@/functions/check-routes'
 import { bag_button_routes } from '@/constants/app-routes-bag-button'
 import { return_button_routes } from '@/constants/app-routes-return-button'
 import { home_button_routes } from '@/constants/app-router-home-button'
@@ -19,6 +19,7 @@ import checkIsUserAuthenticated from '@/functions/check-is-user-authenticated'
 import ButtonGeneric from '@/components/generic-button/button'
 
 import './globals.scss'
+import { bar_search_routes } from '@/constants/app-router-bar-search'
 
 require('dotenv').config()
 
@@ -37,7 +38,7 @@ export default function RootLayout({
     routes: bag_button_routes,
   })
 
-  const acceptsReturnButton = acceptsButton({
+  const acceptsReturnButton = acceptsButtonDashboard({
     asPath: pathName,
     routes: return_button_routes,
   })
@@ -57,17 +58,23 @@ export default function RootLayout({
     routes: footer_routes,
   })
 
+  const acceptsSearch = acceptsButton({
+    asPath: pathName,
+    routes: bar_search_routes,
+  })
+
   return (
     <Providers>
       <html lang="en" className="reset-html">
         <body className="reset-styles">
           <header className="header-layout">
-            <Header />
+            <Header hideBar={acceptsSearch} />
 
             {acceptsReturnButton && (
               <ButtonGeneric
                 src_image={'/icons/arrow-left.svg'}
                 className={'button_return_style'}
+                pathName={pathName}
                 ReturnToLastPage={true}
               />
             )}

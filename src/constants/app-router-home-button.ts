@@ -14,6 +14,7 @@ export const home_button_routes = {
     produto: '/produto',
     buscar: '/buscar',
     cadastrar: { name: '/cadastrar-produto' },
+    editarProduto: { name: '/editar-produto/' },
     editar: { name: '/editar-produto' },
     delete: { name: '/deletar-produto' },
     menu: { name: '/cardapio-do-dia' },

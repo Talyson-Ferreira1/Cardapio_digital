@@ -29,3 +29,9 @@ export const acceptsButton = ({ asPath, routes }: props) => {
 
   return appPublicRoute.includes(path)
 }
+
+export const acceptsButtonDashboard = ({ asPath, routes }: props) => {
+  const appPublicRoute = Object.values(routes.hasButton)
+
+  return appPublicRoute.includes(asPath)
+}

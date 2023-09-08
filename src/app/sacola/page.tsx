@@ -6,7 +6,7 @@ import { getAllProductsInBagShopping } from '@/functions/get-all-products-of-bag
 import { sendRequestByWhatsapp } from '@/functions/send-request-for-whatsapp'
 import { UdateProductInBag } from '@/functions/update-product-in-bag'
 import { deleteProductInBag } from '@/functions/delete-product-in-bag'
-import ProductInBag from '@/components/product-in-bag'
+import ProductInBag from '@/components/cards-product/product-in-bag'
 import TotalPrices from '@/components/total-prices'
 import ProductBagLoading from '@/components/Loading/loading-bag-product'
 

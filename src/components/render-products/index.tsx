@@ -8,8 +8,8 @@ import {
 } from '@/functions/dataInStorage'
 import { FetchProductsinDB } from '@/functions/fetch-products'
 import { FormatCoin } from '@/functions/format-coin'
-import HorizontalProduct from '../horizontal-product-card'
-import VerticalProduct from '../vertical-product-card'
+import HorizontalProduct from '../cards-product/horizontal-product-card'
+import VerticalProduct from '../cards-product/vertical-product-card'
 import LoadingHorizontalCard from '../Loading/loading-Horizontal'
 import LoadingVerticalCard from '../Loading/loading-vertical'
 
