@@ -75,7 +75,11 @@ export default function EditProduct() {
         <option value="desserts">Sobremesas</option>
       </select>
 
-      <DashboardProductCard products={products} path="/editar-produto/" />
+      <DashboardProductCard
+        products={products}
+        path="/editar-produto/"
+        deleteProduct={false}
+      />
     </main>
   )
 }

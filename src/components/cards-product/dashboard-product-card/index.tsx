@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation'
 
 import { FormatCoin } from '@/functions/format-coin'
 import { Translate } from '@/functions/translate-category'
-import { DeleteProductInDb } from '@/functions/functions-with-db/delete-product'
 
 import styles from '@/styles/dashboard.module.scss'
 
@@ -33,7 +32,7 @@ export default function DashboardProductCard({
   products: ProductProps
   path?: string
   deleteProduct?: boolean
-  openModal: (_e: string) => void
+  openModal?: (_e: string) => void
 }) {
   const route = useRouter()
 
@@ -44,9 +43,9 @@ export default function DashboardProductCard({
   }
 
   let buttonHandleClick = (id: string) => {
-    openModal(id)
-    /* DeleteProductInDb({ id: id }) */
-    /* route.refresh() */
+    if (openModal) {
+      openModal(id)
+    }
   }
 
   return (
