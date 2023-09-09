@@ -2,7 +2,9 @@
 import { useEffect, useState } from 'react'
 
 import { FetchAllProducts } from '@/functions/Fetch-all-products-in-db'
+import { FilterProducts } from '@/functions/filter-products'
 import DashboardProductCard from '@/components/cards-product/dashboard-product-card'
+import SelectCategory from '@/components/filter-products'
 
 import styles from '@/styles/dashboard.module.scss'
 
@@ -33,52 +35,38 @@ export default function EditProduct() {
     setAllProducts(result)
   }
 
-  const filterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilterCategory(e.target.value)
+  const getCategorySelected = (category: string) => {
+    setFilterCategory(category)
+  }
+
+  const handleChangeFilterproducts = () => {
+    let productsFiltered = FilterProducts({
+      products: allProducts,
+      category: filterCategory,
+    })
+
+    setProducts(productsFiltered)
   }
 
   useEffect(() => {
     FetchData()
-
-    //Salvar os dados no local storage
   }, [])
 
   useEffect(() => {
-    let filteredProducts: AllProductsProps = {}
+    handleChangeFilterproducts()
+  }, [allProducts])
 
-    if (filterCategory === '') {
-      setProducts(allProducts)
-      return
-    }
-
-    Object.keys(allProducts).map((productId) => {
-      if (allProducts[productId].category === filterCategory) {
-        filteredProducts[productId] = allProducts[productId]
-      }
-    })
-    setProducts(filteredProducts)
+  useEffect(() => {
+    handleChangeFilterproducts()
   }, [filterCategory])
 
   return (
     <main className={styles.main}>
-      <select
-        name="category"
-        className={styles.filter_input}
-        onChange={filterChange}
-      >
-        <option value="" selected>
-          Todos os produtos
-        </option>
-        <option value="portions">Porções</option>
-        <option value="recommendation">Recomendações</option>
-        <option value="meals">Refeições Prontas</option>
-        <option value="drinks">Bebidas</option>
-        <option value="desserts">Sobremesas</option>
-      </select>
+      <SelectCategory selectedCategory={getCategorySelected} />
 
       <DashboardProductCard
         products={products}
-        path="/editar-produto/"
+        path="/dashboard/editar-produto/"
         deleteProduct={false}
       />
     </main>

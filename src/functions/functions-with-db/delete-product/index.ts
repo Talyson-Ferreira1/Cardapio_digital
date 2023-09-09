@@ -25,9 +25,10 @@ export async function DeleteProductInDb({ id }: { id: string }) {
       return deleteObject(fileRef)
     })
     await Promise.all(deleteFilePromises)
-
     console.log('Documento e pasta associada excluídos com sucesso.')
+    return true
   } catch (error) {
     console.error('Erro ao excluir documento e pasta:', error)
+    return false
   }
 }

@@ -1,12 +1,13 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { usePathname } from 'next/navigation'
 
 import { FetchAllProducts } from '@/functions/Fetch-all-products-in-db'
 import DashboardProductCard from '@/components/cards-product/dashboard-product-card'
 
 import styles from '@/styles/dashboard.module.scss'
-import Modal from '@/app/modal'
+import Modal from '@/components/modal'
+import { FilterProducts } from '@/functions/filter-products'
+import SelectCategory from '@/components/filter-products'
 
 interface Product {
   name: string
@@ -26,21 +27,19 @@ interface AllProductsProps {
 }
 
 export default function DeleteProduct() {
-  const [products, setProducts] = useState<AllProductsProps>({})
   const [allProducts, setAllProducts] = useState<AllProductsProps>({})
   const [filterCategory, setFilterCategory] = useState<string>('')
+  const [products, setProducts] = useState<AllProductsProps>({})
   const [isOpenModal, setIsOpenModal] = useState<boolean>()
   const [currentId, setCurrentId] = useState<string>('')
-
-  const pathName = usePathname()
 
   const FetchData = async () => {
     let result = await FetchAllProducts()
     setAllProducts(result)
   }
 
-  const filterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilterCategory(e.target.value)
+  const getCategorySelected = (category: string) => {
+    setFilterCategory(category)
   }
 
   const openModal = (id: string) => {
@@ -52,52 +51,39 @@ export default function DeleteProduct() {
     setIsOpenModal(false)
   }
 
+  const handleChangeFilterproducts = () => {
+    let productsFiltered = FilterProducts({
+      products: allProducts,
+      category: filterCategory,
+    })
+
+    setProducts(productsFiltered)
+  }
+
   useEffect(() => {
     FetchData()
-    console.log(pathName)
-    //Salvar os dados no local storage
   }, [])
 
   useEffect(() => {
-    let filteredProducts: AllProductsProps = {}
+    handleChangeFilterproducts()
+  }, [allProducts])
 
-    if (filterCategory === '') {
-      setProducts(allProducts)
-      return
-    }
-
-    Object.keys(allProducts).map((productId) => {
-      if (allProducts[productId].category === filterCategory) {
-        filteredProducts[productId] = allProducts[productId]
-      }
-    })
-    setProducts(filteredProducts)
+  useEffect(() => {
+    handleChangeFilterproducts()
   }, [filterCategory])
 
   return (
     <main className={styles.main}>
-      <select
-        name="category"
-        className={styles.filter_input}
-        onChange={filterChange}
-      >
-        <option value="" selected>
-          Todos os produtos
-        </option>
-        <option value="portions">Porções</option>
-        <option value="recommendation">Recomendações</option>
-        <option value="meals">Refeições Prontas</option>
-        <option value="drinks">Bebidas</option>
-        <option value="desserts">Sobremesas</option>
-      </select>
-
-      {isOpenModal && <Modal close={closeModal} productId={currentId} />}
-
+      <SelectCategory selectedCategory={getCategorySelected} />
       <DashboardProductCard
         products={products}
-        deleteProduct={true}
         openModal={openModal}
+        deleteProduct={true}
       />
+
+      {isOpenModal && (
+        <Modal close={closeModal} productId={currentId} deleteModal={true} />
+      )}
     </main>
   )
 }

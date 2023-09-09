@@ -1,4 +1,4 @@
-import styles from '../../styles/Loaders.module.scss'
+import styles from '@/styles/Loaders.module.scss'
 
 export default function LoadingHorizontalCard() {
   return (

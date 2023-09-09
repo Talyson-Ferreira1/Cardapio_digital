@@ -10,6 +10,7 @@ $gray-color-5: rgb(48, 48, 48);
 $gray-color-6: #60696b;
 
 $green-color-1: rgb(5, 126, 5);
+$green-color-2: rgb(232, 254, 227);
 
 $blur-color-1: rgba(234, 234, 234, 0.697);
 $blur-color-2: rgba(217, 217, 217, 0.697);
@@ -19,7 +20,7 @@ $orange-warning: orange;
 
 $color-name-product: rgb(77, 77, 77);
 $color-description-product: rgb(100, 100, 100);
-$color-price-product: rgb(16, 179, 16);
+$color-price-product: #10b310;
 
 $red-color-1: rgb(240, 62, 62);
 $red-color-2: rgb(249, 72, 72);
@@ -109,6 +110,23 @@ $box-shadow-1:
 
   &:hover {
     transform: scale(1.04);
+  }
+}
+
+@mixin button-modal {
+  width: 100%;
+  height: 2rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  opacity: 0.8;
+  color: white;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+    opacity: 1;
   }
 }
 /* ------------------ measures ------------------*/

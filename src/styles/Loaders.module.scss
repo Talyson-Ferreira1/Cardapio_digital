@@ -30,12 +30,6 @@
   animation-duration: 3s;
 }
 
-@keyframes spinner-a4dj62 {
-  100% {
-    transform: rotate(1turn);
-  }
-}
-
 /* ------------------ Style of Loading horizontal component ------------------ */
 
 .container_loading_horizontal {
@@ -95,16 +89,6 @@
     rgba(227, 227, 227, 0) 100%
   );
   animation: gradient-animation 0.8s linear infinite;
-}
-
-@keyframes gradient-animation {
-  0% {
-    transform: translateX(-100%);
-  }
-
-  100% {
-    transform: translateX(100%);
-  }
 }
 
 /* ------------------ Style of Loading component ------------------ */
@@ -184,16 +168,6 @@
   animation: gradient-animation 0.8s linear infinite;
 }
 
-@keyframes gradient-animation {
-  0% {
-    transform: translateX(-100%);
-  }
-
-  100% {
-    transform: translateX(100%);
-  }
-}
-
 /* ------------------ Style of spinner for buttons component ------------------ */
 
 .loader {
@@ -207,6 +181,47 @@
   animation: spin89345 1s linear infinite;
 }
 
+/* ------------------ Style of loading product dashboard component ------------------ */
+
+.card_loading_dashboard {
+  width: 200px;
+  height: 500px;
+  border: 1px solid $gray-color-3;
+  border-radius: 10px;
+  padding: 1rem;
+  background: $blur-color-3;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card_loading_dashboard::after {
+  @include absolute-init;
+  content: '';
+  position: absolute;
+  background: linear-gradient(
+    110deg,
+    rgba(227, 227, 227, 0) 0%,
+    rgba(227, 227, 227, 0) 40%,
+    rgba(227, 227, 227, 0.5) 50%,
+    rgba(227, 227, 227, 0) 60%,
+    rgba(227, 227, 227, 0) 100%
+  );
+  animation: gradient-animation 0.8s linear infinite;
+}
+
+/* ------------------ Keyframes ------------------ */
+
+@keyframes gradient-animation {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 @keyframes spin89345 {
   0% {
     transform: rotate(0deg);
@@ -217,4 +232,8 @@
   }
 }
 
-/* ------------------ Style of loading product bag component ------------------ */
+@keyframes spinner-a4dj62 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
