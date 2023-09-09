@@ -1,29 +1,39 @@
 'use client'
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
 import { useRouter } from 'next/navigation'
 
-import checkIsUserAuthenticated from '@/functions/check-is-user-authenticated'
-import * as Yup from 'yup'
 import { LogIn, onAuthStateChange } from '@/services/authServices'
 import { User } from 'firebase/auth'
+import checkIsUserAuthenticated from '@/functions/check-is-user-authenticated'
 
-import styles from '../../styles/login.module.scss'
-import Image from 'next/image'
+import styles from '@/styles/login.module.scss'
+import SpinnerButton from '@/components/Loading/spinner'
+
+interface valuesFormik {
+  email: string
+  password: string
+}
 
 export default function Login() {
   const [user, setUser] = useState<User | null>()
   const [permissionDenied, setPermissionDenied] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const [spinner, setSpinner] = useState<boolean>(false)
   const router = useRouter()
 
-  const FetchLoginUser = (data: any) => {
-    LogIn(data.email, data.password)
+  const FetchLoginUser = ({ email, password }: valuesFormik) => {
+    setSpinner(true)
+
+    LogIn(email, password)
       .then(() => {
         router.push('/dashboard')
         setPermissionDenied(false)
       })
       .catch((error) => {
+        console.log(error)
         setPermissionDenied(true)
       })
   }
@@ -136,11 +146,9 @@ export default function Login() {
               name="password"
               component="span"
             />
-            <Field
-              className={styles.submit}
-              type="submit"
-              value="Entrar"
-            ></Field>
+            <button className={styles.submit} type="submit">
+              {!spinner ? 'Entrar' : <SpinnerButton />}
+            </button>
           </Form>
         </Formik>
       </section>

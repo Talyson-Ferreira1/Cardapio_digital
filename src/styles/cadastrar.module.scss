@@ -67,6 +67,7 @@
     outline: 1px solid $gray-color-2;
   }
 }
+
 .height_product,
 .price_product,
 .description_product,
@@ -104,23 +105,24 @@
   }
 }
 
-.submit {
+.submit_cadastrar {
+  @include center-rows;
   width: 95vw;
   height: 4rem;
   background-color: $cor-primaria;
   border-radius: 20px;
   border: none;
-  cursor: pointer;
   color: white;
   font-size: 1.5rem;
   font-weight: 700;
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.01);
   }
 }
 
-.error {
+.error_cadastrar {
   padding-left: 1rem;
   width: 95%;
   height: 1rem;

@@ -103,6 +103,14 @@ $box-shadow-1:
     transform: scale(1.1);
   }
 }
+
+@mixin reset-button {
+  border: 1px solid $gray-color-3;
+
+  &:hover {
+    transform: scale(1.04);
+  }
+}
 /* ------------------ measures ------------------*/
 
 @mixin full-size {

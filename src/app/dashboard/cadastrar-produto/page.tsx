@@ -12,6 +12,7 @@ import { GenerateRandomId } from '@/functions/generate-random-id'
 
 import styles from '@/styles/cadastrar.module.scss'
 import 'react-toastify/dist/ReactToastify.css'
+import SpinnerButton from '@/components/Loading/spinner'
 
 interface DataImage {
   image: string
@@ -23,10 +24,12 @@ export default function CadastrarProduto() {
   const [imagePreview, setImagePreview] = useState<DataImage>()
   const [existImage, setExistImage] = useState<boolean>(false)
   const [image, setImage] = useState<any>({})
+  const [activeSpinner, setActiveSpinner] = useState<boolean>(false)
   const notifySucess = () => toast('Produto cadastrado')
   const notifyError = () => toast('Erro ao cadastrar')
 
   const SendProductToDB = async (values: any) => {
+    setActiveSpinner(true)
     const db = getFirestore(app)
     const storage = getStorage(app)
     const SendProductCollection = collection(db, 'Products')
@@ -62,6 +65,8 @@ export default function CadastrarProduto() {
       console.error('Erro ao cadastrar produto:', error)
       notifyError()
     }
+
+    setActiveSpinner(false)
   }
 
   const resetPreview = () => {
@@ -95,7 +100,7 @@ export default function CadastrarProduto() {
     description: Yup.string()
       .required('A descrição é obrigatório')
       .max(100, 'Deve ter máximo 100 caracteres'),
-    height: Yup.number(),
+    weight: Yup.number().required('O peso da porção do produto é obrigatório'),
     price: Yup.number().required('O valor é obrigatório'),
     category: Yup.string().required('Selecione uma categoria'),
   })
@@ -121,7 +126,7 @@ export default function CadastrarProduto() {
               description: '',
               category: '',
               price: '',
-              weight: 0,
+              weight: '',
             }}
           >
             <Form className={styles.form}>
@@ -170,7 +175,7 @@ export default function CadastrarProduto() {
                 )}
               </label>
               <ErrorMessage
-                className={styles.error}
+                className={styles.error_cadastrar}
                 name="image"
                 component="div"
               />
@@ -190,7 +195,7 @@ export default function CadastrarProduto() {
                 <option value="desserts">Sobremesas</option>
               </Field>
               <ErrorMessage
-                className={styles.error}
+                className={styles.error_cadastrar}
                 name="category"
                 component="div"
               />
@@ -209,7 +214,7 @@ export default function CadastrarProduto() {
                 <span>Nome do produto</span>
               </label>
               <ErrorMessage
-                className={styles.error}
+                className={styles.error_cadastrar}
                 name="name"
                 component="div"
               />
@@ -228,13 +233,13 @@ export default function CadastrarProduto() {
                 <span>Descrição do produto</span>
               </label>
               <ErrorMessage
-                className={styles.error}
+                className={styles.error_cadastrar}
                 name="description"
                 component="div"
               />
 
               <label
-                htmlFor="height"
+                htmlFor="weight"
                 className={styles.height_product}
                 title="Insira o peso."
               >
@@ -244,16 +249,16 @@ export default function CadastrarProduto() {
                   step="0.01"
                   type="number"
                   pattern="[0-9]*"
-                  name="height"
+                  name="weight"
                   required
                 />
                 <span>
-                  Peso do produto <small>Ex: 300</small>
+                  Peso do produto em gramas <small>Ex: 300</small>
                 </span>
               </label>
               <ErrorMessage
-                className={styles.error}
-                name="height"
+                className={styles.error_cadastrar}
+                name="weight"
                 component="div"
               />
 
@@ -276,13 +281,13 @@ export default function CadastrarProduto() {
                 </span>
               </label>
               <ErrorMessage
-                className={styles.error}
+                className={styles.error_cadastrar}
                 name="price"
                 component="div"
               />
 
-              <button className={styles.submit} type="submit">
-                Cadastrar produto
+              <button className={styles.submit_cadastrar} type="submit">
+                {!activeSpinner ? 'Cadastrar produto' : <SpinnerButton />}
               </button>
             </Form>
           </Formik>

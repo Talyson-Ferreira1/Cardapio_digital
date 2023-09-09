@@ -2,9 +2,10 @@
 import { useEffect, useState } from 'react'
 
 import { FetchAllProducts } from '@/functions/Fetch-all-products-in-db'
+import DashboardProductCard from '@/components/cards-product/dashboard-product-card'
 
 import styles from '@/styles/dashboard.module.scss'
-import DashboardProductCard from '@/components/cards-product/dashboard-product-card'
+
 interface Product {
   name: string
   description: string

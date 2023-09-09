@@ -58,6 +58,7 @@
 .card_product {
   width: 200px;
   height: auto;
+  max-height: 500px;
   border: 1px solid $gray-color-3;
   border-radius: 10px;
   padding: 1rem;
@@ -122,8 +123,11 @@
 }
 
 .filter_input {
+  padding: 0.5rem;
+  border: 1px solid $gray-color-3;
+  border-radius: 5px;
   height: 3rem;
-  width: 10vw;
+  width: 10rem;
   position: absolute;
   top: 1rem;
 }
@@ -218,17 +222,3 @@
   border-radius: 50%;
   background: $red-warning-2;
 }
-/*   
-  image: string
-  name: string
-  description: string
-  price: number
-  weight: number 
-  category: string
-  available: boolean
-  order_only: boolean
-  
-  id: string
-  stars: number
-  daily_menu: boolean
-  */
