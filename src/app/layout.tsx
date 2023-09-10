@@ -38,7 +38,7 @@ export default function RootLayout({
     routes: bag_button_routes,
   })
 
-  const acceptsReturnButton = acceptsButtonDashboard({
+  const acceptsReturnButton = acceptsButton({
     asPath: pathName,
     routes: return_button_routes,
   })

@@ -2,15 +2,15 @@ import Image from 'next/image'
 
 import styles from '@/styles/dashboard.module.scss'
 
-type props = {
+type ModalDeleteProps = {
   actionDeleteButton: () => void
   actionCancelButton: () => void
 }
 
-export default function ModalDeleteProduct({
+export const ModalDelete = ({
   actionDeleteButton,
   actionCancelButton,
-}: props) {
+}: ModalDeleteProps) => {
   return (
     <>
       <div className={styles.ilustration_modal_delete}>
@@ -21,7 +21,6 @@ export default function ModalDeleteProduct({
           height="30"
         />
       </div>
-
       <h2> Excluir Produto</h2>
       <p>
         Você tem certeza que deseja excluir esse produto?

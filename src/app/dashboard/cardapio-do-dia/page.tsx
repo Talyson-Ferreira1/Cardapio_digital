@@ -1,13 +1,14 @@
 'use client'
 import { useEffect, useState } from 'react'
 
-import { FetchAllProducts } from '@/functions/Fetch-all-products-in-db'
+import { Modal } from '@/components/modal'
+import { EditDailyMenuInDb } from '@/functions/functions-with-db/edit-product-daily-menu'
 import { FilterProducts } from '@/functions/filter-products'
+import { FetchAllProducts } from '@/functions/Fetch-all-products-in-db'
 import SelectCategory from '@/components/filter-products'
 import DashboardProductCard from '@/components/cards-product/dashboard-product-card'
 
 import styles from '@/styles/dashboard.module.scss'
-import Modal from '@/components/modal'
 interface AllProductsProps {
   [product: string]: {
     name: string
@@ -28,7 +29,7 @@ export default function DailyMenu() {
   const [allProducts, setAllProducts] = useState<AllProductsProps>({})
   const [filterCategory, setFilterCategory] = useState<string>('')
   const [products, setProducts] = useState<AllProductsProps>({})
-  const [isOpenModal, setIsOpenModal] = useState<boolean>()
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [currentId, setCurrentId] = useState<string>('')
 
   const FetchData = async () => {
@@ -47,6 +48,9 @@ export default function DailyMenu() {
 
   const closeModal = () => {
     setIsOpenModal(false)
+  }
+
+  const reloadComponent = () => {
     window.location.reload()
   }
 
@@ -57,6 +61,24 @@ export default function DailyMenu() {
     })
 
     setProducts(productsFiltered)
+  }
+
+  const includeProductInMenuDaily = async () => {
+    let includeProduct = await EditDailyMenuInDb(currentId, true)
+
+    if (includeProduct) {
+      closeModal()
+      reloadComponent()
+    }
+  }
+
+  const excludeProductInMenuDaily = async () => {
+    let removedProduct = await EditDailyMenuInDb(currentId, false)
+
+    if (removedProduct) {
+      closeModal()
+      reloadComponent()
+    }
   }
 
   useEffect(() => {
@@ -80,14 +102,13 @@ export default function DailyMenu() {
         menuDaily={true}
       />
 
-      {isOpenModal && (
-        <Modal
-          close={closeModal}
-          productId={currentId}
-          menuDailyModal={true}
-          currentProduct={allProducts[currentId]}
-        />
-      )}
+      <Modal.Root isOpen={isOpenModal} isClose={closeModal}>
+        <Modal.DailyMenu
+          actionIncludeProduct={includeProductInMenuDaily}
+          actionExcludeProduct={excludeProductInMenuDaily}
+          product={allProducts[currentId]}
+        ></Modal.DailyMenu>
+      </Modal.Root>
     </main>
   )
 }

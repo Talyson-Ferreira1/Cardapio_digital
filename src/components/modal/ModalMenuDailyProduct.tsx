@@ -1,9 +1,9 @@
+import { useState } from 'react'
 import Image from 'next/image'
 
 import styles from '@/styles/dashboard.module.scss'
-import { useState } from 'react'
 
-interface productProps {
+interface ProductProps {
   name: string
   description: string
   price: number
@@ -17,19 +17,18 @@ interface productProps {
   weight: number
 }
 
-type props = {
+type ModalMenuDailyProductProps = {
   actionIncludeProduct: () => void
   actionExcludeProduct: () => void
-  product: productProps
+  product: ProductProps
 }
 
-export default function ModalMenuDailyProduct({
+export const ModalEditDailyMenu = ({
   actionIncludeProduct,
   actionExcludeProduct,
   product,
-}: props) {
+}: ModalMenuDailyProductProps) => {
   const [alreadyIncluded] = useState<boolean>(product.daily_menu)
-
   return (
     <>
       {alreadyIncluded ? (

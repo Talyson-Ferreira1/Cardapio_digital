@@ -93,6 +93,7 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
               alt="product image"
               width={430}
               height={430}
+              priority
             />
           </div>
           <div className={styles.info}>
@@ -106,6 +107,7 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
                 alt="whatsapp icon"
                 width={15}
                 height={15}
+                priority
               />
               Pedir esse Produto
             </button>
@@ -115,6 +117,7 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
                 alt="whatsapp icon"
                 width={15}
                 height={15}
+                priority
               />
               Adicionar a sacola
             </button>

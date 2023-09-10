@@ -35,6 +35,7 @@ export default function ProductInBag({
           alt="Product image"
           width={10}
           height={10}
+          priority
         />
       </button>
 

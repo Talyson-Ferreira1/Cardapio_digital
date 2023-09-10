@@ -6,6 +6,7 @@ import {
   FetchProductsCategory,
   VerifyIfExistDataInStorage,
 } from '@/functions/dataInStorage'
+import { FetchAllProducts } from '@/functions/Fetch-all-products-in-db'
 import RenderProducts from '@/components/render-products'
 
 import styles from './page.module.scss'
@@ -33,7 +34,7 @@ export default function Home() {
       if (verify) {
         getProducts = FetchProductsCategory({ category: `drinks` })
       } else {
-        const productsFromDB = await FetchProductsinDB()
+        const productsFromDB = await FetchAllProducts()
         getProducts = FetchProductsCategory({
           data: productsFromDB,
           category: `dinks`,

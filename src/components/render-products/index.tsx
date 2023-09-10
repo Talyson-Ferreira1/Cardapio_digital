@@ -6,7 +6,7 @@ import {
   FetchProductsCategory,
   VerifyIfExistDataInStorage,
 } from '@/functions/dataInStorage'
-import { FetchProductsinDB } from '@/functions/fetch-products'
+import { FetchAllProducts } from '@/functions/Fetch-all-products-in-db'
 import { FormatCoin } from '@/functions/format-coin'
 import HorizontalProduct from '../cards-product/horizontal-product-card'
 import VerticalProduct from '../cards-product/vertical-product-card'
@@ -14,7 +14,6 @@ import LoadingHorizontalCard from '../Loading/loading-Horizontal'
 import LoadingVerticalCard from '../Loading/loading-vertical'
 
 import styles from '../../styles/render-products.module.scss'
-import containerStyle from '../../styles/pages-styles.module.scss'
 
 interface ProductProps {
   [product: string]: {
@@ -96,10 +95,6 @@ export default function RenderProducts({ category, direction }: props) {
   }, [])
 
   useEffect(() => {
-    console.log(directionFlex)
-  }, [directionFlex])
-
-  useEffect(() => {
     const fetchData = async () => {
       let verify = VerifyIfExistDataInStorage()
       let getProducts
@@ -107,7 +102,7 @@ export default function RenderProducts({ category, direction }: props) {
       if (verify) {
         getProducts = FetchProductsCategory({ category: `${category}` })
       } else {
-        const productsFromDB = await FetchProductsinDB()
+        const productsFromDB = await FetchAllProducts()
         getProducts = FetchProductsCategory({
           data: productsFromDB,
           category: `${category}`,

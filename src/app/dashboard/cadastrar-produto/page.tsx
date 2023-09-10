@@ -45,7 +45,7 @@ export default function CadastrarProduto() {
         stars: 5,
         order_only: false,
         daily_menu: false,
-        weight: 0,
+        weight: values.weight,
       }
 
       const docRef = doc(SendProductCollection, `${newValues.id}`)
