@@ -1,20 +1,20 @@
-export const footer_routes = {
+export const header_routes = {
   hasButton: {
     home: '/',
+    porcoes: '/porcoes',
     bebidas: '/bebidas',
+    refeicoes: '/refeicoes',
+    sobremesas: '/sobremesas',
+    produto: '/produto/',
+
     buscar: '/buscar',
+    sacola: '/sacola',
 
     dashboard: '/dashboard',
     dashboardChildrens: '/dashboard/',
-
-    porcoes: '/porcoes',
-    refeicoes: '/refeicoes',
-    sobremesas: '/sobremesas',
   },
 
   noButton: {
-    sacola: { name: '/sacola' },
     login: { name: '/login' },
-    produto: { name: '/produto' },
   },
 }

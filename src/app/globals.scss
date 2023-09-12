@@ -2,11 +2,11 @@
 
 $cor-primaria: #eabf16;
 
-$gray-color-1: rgba(39, 39, 39, 0.697);
-$gray-color-2: rgb(109, 109, 109);
-$gray-color-3: rgba(150, 150, 150, 0.52);
-$gray-color-4: rgba(197, 197, 197, 0.141);
-$gray-color-5: rgb(48, 48, 48);
+$gray-color-1: #272727b2;
+$gray-color-2: #6d6d6d;
+$gray-color-3: #96969685;
+$gray-color-4: #c5c5c524;
+$gray-color-5: #303030;
 $gray-color-6: #60696b;
 
 $green-color-1: rgb(5, 126, 5);
@@ -84,6 +84,7 @@ $box-shadow-1:
 }
 
 @mixin buttons-header {
+  @include center-rows;
   position: absolute;
   top: 2rem;
   width: 3rem;
@@ -214,6 +215,11 @@ $box-shadow-1:
   transform: translate(-50%, -50%);
 }
 
+@mixin heigth-page {
+  padding-bottom: calc(150px + 1rem);
+  min-height: $size-header;
+}
+
 /* ------------------ class layout ------------------*/
 
 .reset-html {
@@ -223,7 +229,7 @@ $box-shadow-1:
 .reset-styles {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   flex-direction: column;
   position: relative;
   width: 100vw;

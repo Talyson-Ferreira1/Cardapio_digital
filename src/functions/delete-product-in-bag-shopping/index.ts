@@ -1,4 +1,4 @@
-import { getTotalPrices } from '../get-total-price'
+import { getTotalPrices } from '../get-total-price-in-bag-shopping'
 
 export function deleteProductInBag(id: string) {
   const productsInBagShopping = localStorage.getItem('Shopping cart')

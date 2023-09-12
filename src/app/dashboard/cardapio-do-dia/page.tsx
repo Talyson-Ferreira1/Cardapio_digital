@@ -2,13 +2,13 @@
 import { useEffect, useState } from 'react'
 
 import { Modal } from '@/components/modal'
-import { EditDailyMenuInDb } from '@/functions/functions-with-db/edit-product-daily-menu'
 import { FilterProducts } from '@/functions/filter-products'
 import { FetchAllProducts } from '@/functions/Fetch-all-products-in-db'
 import SelectCategory from '@/components/filter-products'
 import DashboardProductCard from '@/components/cards-product/dashboard-product-card'
 
 import styles from '@/styles/dashboard.module.scss'
+import { updatesProductDataInTheFirestore } from '@/services/firebase/firestore'
 interface AllProductsProps {
   [product: string]: {
     name: string
@@ -64,7 +64,13 @@ export default function DailyMenu() {
   }
 
   const includeProductInMenuDaily = async () => {
-    let includeProduct = await EditDailyMenuInDb(currentId, true)
+    /*     let includeProduct = await EditDailyMenuInDb(currentId, true)
+     */
+
+    let includeProduct = await updatesProductDataInTheFirestore({
+      id: currentId,
+      daily_menu: true,
+    })
 
     if (includeProduct) {
       closeModal()
@@ -73,7 +79,13 @@ export default function DailyMenu() {
   }
 
   const excludeProductInMenuDaily = async () => {
-    let removedProduct = await EditDailyMenuInDb(currentId, false)
+    /*     let removedProduct = await EditDailyMenuInDb(currentId, false)
+     */
+
+    let removedProduct = await updatesProductDataInTheFirestore({
+      id: currentId,
+      daily_menu: false,
+    })
 
     if (removedProduct) {
       closeModal()

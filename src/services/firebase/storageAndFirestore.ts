@@ -1,13 +1,6 @@
-import {
-  getFirestore,
-  collection,
-  doc,
-  deleteDoc,
-  getDocs,
-  QuerySnapshot,
-} from 'firebase/firestore'
+import { getFirestore, collection, doc, deleteDoc } from 'firebase/firestore'
 import { getStorage, ref, listAll, deleteObject } from 'firebase/storage'
-import { app } from '@/services/exportFirebase'
+import { app } from './exportFirebaseConfigs'
 
 let Info_New_Collection = process.env.NEXT_PUBLIC_INFO_NEW_COLLECTION
 let newFolderNameImg = process.env.NEXT_PUBLIC_NEW_FOLDERNAMEIMG
@@ -18,6 +11,7 @@ export async function DeleteProductInDb({ id }: { id: string }) {
 
   try {
     await deleteDoc(doc(docCollection, id))
+
     const storage = getStorage(app)
     const folderRef = ref(storage, `${newFolderNameImg}/${id}`)
     const files = await listAll(folderRef)

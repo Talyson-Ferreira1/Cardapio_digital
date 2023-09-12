@@ -1,12 +1,12 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import styles from '@/styles/horizontal-card.module.scss';
+import styles from '@/styles/horizontal-card.module.scss'
 
 interface ProductProps {
-  productImage: string;
-  productName: string;
-  productDescription: string;
-  productPrice: string;
+  productImage: string
+  productName: string
+  productDescription: string
+  productPrice: string
 }
 
 export default function HorizontalProduct({
@@ -21,14 +21,13 @@ export default function HorizontalProduct({
         <Image
           src={productImage}
           alt="Product image"
-          width="300"
-          height="300"
-          priority
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
       <h2>{productName}</h2>
       <p>{productDescription}</p>
       <h3>{productPrice}</h3>
     </div>
-  );
+  )
 }

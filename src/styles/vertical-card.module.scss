@@ -1,8 +1,8 @@
 @import '../app/globals.scss';
 
 .container_product {
-  width: 100%;
-  height: 130px;
+  width: 120%;
+  /* height: 120px; */
   max-width: 50rem;
   display: grid;
   grid-template-columns: 35% 65%;
@@ -21,13 +21,21 @@
 
   div {
     @include center-rows;
-    @include rounded-edge;
+    @include rounded-edge-2;
+    width: 115px;
+    height: 115px;
     grid-row: span 3;
     background: white;
     overflow: hidden;
     box-shadow: 10px 10px 59px -25px rgba(0, 0, 0, 0.75);
     margin: 0.5rem;
     position: relative;
+    justify-self: center;
+    place-self: center;
+
+    img {
+      aspect-ratio: 1;
+    }
   }
 
   h2 {

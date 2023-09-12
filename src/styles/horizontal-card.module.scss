@@ -2,12 +2,11 @@
 
 .container_product {
   width: 250px;
-  height: 200px;
+  height: 350px;
   display: grid;
   border-radius: 20px;
-  border: 1px solid $gray-color-4;
   grid-template-columns: 100%;
-  grid-template-rows: 60% 10% 20% 10%;
+  grid-template-rows: 250px calc(calc(100% - 250px) / 4) 10% 10%;
   box-shadow: 4px 4px 9px 1px rgba(0, 0, 0, 0.29);
   overflow: hidden;
   padding-bottom: 0.5rem;
@@ -21,6 +20,7 @@
     @include center-rows;
     overflow: hidden;
     position: relative;
+    aspect-ratio: 1;
   }
 
   h2 {

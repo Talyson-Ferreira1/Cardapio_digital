@@ -5,13 +5,12 @@ import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { useRouter } from 'next/navigation'
 
-import { LogIn, onAuthStateChange } from '@/services/authServices'
+import { LogIn, onAuthStateChange } from '@/services/firebase/auth'
 import { User } from 'firebase/auth'
-import checkIsUserAuthenticated from '@/functions/check-is-user-authenticated'
+import SpinnerButton from '@/components/Loading/spinner'
+import checkIsUserAuthenticated from '@/services/firebase/auth'
 
 import styles from '@/styles/login.module.scss'
-import SpinnerButton from '@/components/Loading/spinner'
-
 interface valuesFormik {
   email: string
   password: string
@@ -69,6 +68,16 @@ export default function Login() {
     UserAuthenticated()
   }, [])
 
+  useEffect(() => {
+    if (permissionDenied) {
+      setTimeout(() => {
+        setPermissionDenied(false)
+      }, 2000)
+    }
+
+    setSpinner(false)
+  }, [permissionDenied])
+
   return (
     <main className={styles.main}>
       <section>
@@ -119,7 +128,7 @@ export default function Login() {
                 required
               />
               {
-                <button
+                <div
                   className={styles.show_password}
                   onClick={() => setShowPassword(!showPassword)}
                 >
@@ -138,7 +147,7 @@ export default function Login() {
                       height="20"
                     />
                   )}
-                </button>
+                </div>
               }
             </label>
             <ErrorMessage

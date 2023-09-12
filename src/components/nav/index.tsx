@@ -1,19 +1,25 @@
-'use client';
+'use client'
 
-import ButtonTag from './button';
+import ButtonTag from './button'
 
-import styles from '@/styles/navTags.module.scss';
+import styles from '@/styles/navTags.module.scss'
 
 interface tagProps {
   [tag: string]: {
-    ilustration: string;
-    name: string;
-    pathName: string;
-  };
+    ilustration: string
+    name: string
+    pathName: string
+  }
 }
 
 export default function TagsHeader() {
   const tags: tagProps = {
+    MenuDailyProps: {
+      ilustration: '/ilustracoes/menu.png',
+      name: 'Cardápio do dia',
+      pathName: '/',
+    },
+
     dessertsProps: {
       ilustration: '/ilustracoes/sobremesa.png',
       name: 'Sobremesas',
@@ -37,14 +43,14 @@ export default function TagsHeader() {
       name: 'Porções',
       pathName: '/porcoes',
     },
-  };
+  }
 
   return (
     <>
       <nav className={styles.container_tags}>
         <>
           {Object.keys(tags).map((tag, index) => {
-            let currentTag = tags[tag];
+            let currentTag = tags[tag]
 
             return (
               <ButtonTag
@@ -53,10 +59,10 @@ export default function TagsHeader() {
                 name={currentTag.name}
                 pathName={currentTag.pathName}
               />
-            );
+            )
           })}
         </>
       </nav>
     </>
-  );
+  )
 }

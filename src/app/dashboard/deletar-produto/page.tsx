@@ -2,11 +2,11 @@
 import { useEffect, useState } from 'react'
 
 import { Modal } from '@/components/modal/index'
-import { DeleteProductInDb } from '@/functions/functions-with-db/delete-product'
 import { FilterProducts } from '@/functions/filter-products'
 import { FetchAllProducts } from '@/functions/Fetch-all-products-in-db'
 import SelectCategory from '@/components/filter-products'
 import DashboardProductCard from '@/components/cards-product/dashboard-product-card'
+import { DeleteProductInDb } from '@/services/firebase/storageAndFirestore'
 
 import styles from '@/styles/dashboard.module.scss'
 
@@ -99,7 +99,7 @@ export default function DeleteProduct() {
       <Modal.Root isOpen={isOpenModal} isClose={closeModal}>
         <Modal.DeleteProduct
           actionDeleteButton={deleteProduct}
-          actionCancelButton={close}
+          actionCancelButton={closeModal}
         ></Modal.DeleteProduct>
       </Modal.Root>
     </main>

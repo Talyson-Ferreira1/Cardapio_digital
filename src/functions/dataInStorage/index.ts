@@ -1,44 +1,67 @@
-'use client';
+'use client'
 interface ProductProps {
   [product: string]: {
-    name: string;
-    description: string;
-    price: number;
-    category: string;
-    image: string;
-    id: string;
-    available: boolean;
-    stars: number;
-  };
-}
-
-interface categoryProps {
-  data?: ProductProps;
-  category: string;
-}
-
-export function SaveDataInLocalStorage(products: ProductProps) {
-  localStorage.setItem('All products', JSON.stringify(products));
-}
-
-export function VerifyIfExistDataInStorage() {
-  if (localStorage.getItem('All products') != null) {
-    return true;
-  } else {
-    return false;
+    name: string
+    description: string
+    price: number
+    category: string
+    image: string
+    id: string
+    available: boolean
+    stars: number
   }
 }
 
+interface categoryProps {
+  data?: ProductProps
+  category: string
+}
+
+export function SaveDataInLocalStorage(products: ProductProps) {
+  sessionStorage.setItem('All products', JSON.stringify(products))
+}
+
+export function VerifyIfExistDataInStorage() {
+  if (sessionStorage.getItem('All products') != null) {
+    return true
+  } else {
+    return false
+  }
+}
+
+export function GetAllproductsInlocalStorage() {
+  let storageProducts = sessionStorage.getItem('All products')
+
+  if (storageProducts) return storageProducts
+}
+
+export function GetAllproductsOfDailyMenu(allproducts?: ProductProps) {
+  let storageProducts = sessionStorage.getItem('All products')
+  let filteredProducts: ProductProps = {}
+
+  if (storageProducts != null) {
+    let products = allproducts ? allproducts : JSON.parse(storageProducts)
+
+    Object.keys(products).map((productId) => {
+      if (products[productId].daily_menu === true) {
+        filteredProducts[productId] = products[productId]
+      }
+    })
+  }
+
+  return filteredProducts
+}
+
 export function FetchProductsCategory({ data, category }: categoryProps) {
-  let storageProducts = localStorage.getItem('All products');
-  let AllProducts;
-  let newData = {};
+  let storageProducts = sessionStorage.getItem('All products')
+  let AllProducts
+  let newData = {}
 
   if (!data && storageProducts != null) {
-    AllProducts = JSON.parse(storageProducts);
+    AllProducts = JSON.parse(storageProducts)
   } else {
-    AllProducts = data;
-    data && localStorage.setItem('All products', JSON.stringify(data));
+    AllProducts = data
+    data && sessionStorage.setItem('All products', JSON.stringify(data))
   }
 
   for (let Product in AllProducts) {
@@ -46,9 +69,9 @@ export function FetchProductsCategory({ data, category }: categoryProps) {
       newData = {
         ...newData,
         [Product]: AllProducts[Product],
-      };
+      }
     }
   }
 
-  return newData;
+  return newData
 }

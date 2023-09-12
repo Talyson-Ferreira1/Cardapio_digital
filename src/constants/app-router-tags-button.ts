@@ -5,10 +5,10 @@ export const tags_button_routes = {
     refeicoes: '/refeicoes',
     porcoes: '/porcoes',
     sobremesas: '/sobremesas',
-    buscar: '/buscar',
   },
 
   noButton: {
+    buscar: '/buscar',
     dashboard: { name: '/dashboard' },
     login: { name: '/login' },
     sacola: { name: '/sacola' },

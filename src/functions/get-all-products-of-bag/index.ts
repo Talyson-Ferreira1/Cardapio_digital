@@ -1,6 +1,6 @@
 export function getAllProductsInBagShopping() {
   let getBagShoppingInLocStorage = localStorage.getItem('Shopping cart')
-  let getAllProductsInLocStorage = localStorage.getItem('All products')
+  let getAllProductsInLocStorage = sessionStorage.getItem('All products')
   let newData: any = {}
 
   if (getBagShoppingInLocStorage && getAllProductsInLocStorage) {

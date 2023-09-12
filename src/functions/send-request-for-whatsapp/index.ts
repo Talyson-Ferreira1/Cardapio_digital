@@ -1,9 +1,9 @@
 import { FormatCoin } from '../format-coin'
-import { getTotalPrices } from '../get-total-price'
+import { getTotalPrices } from '../get-total-price-in-bag-shopping'
 
 export function sendRequestByWhatsapp() {
   let getBagShoppingInLocStorage = localStorage.getItem('Shopping cart')
-  let getAllProductsInLocStorage = localStorage.getItem('All products')
+  let getAllProductsInLocStorage = sessionStorage.getItem('All products')
   let message = '*Olá! Gostaria de fazer um pedido*.\n \n'
   let totalPrice = getTotalPrices()
 

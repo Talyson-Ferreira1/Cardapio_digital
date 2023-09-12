@@ -5,113 +5,100 @@ import {
   QuerySnapshot,
 } from 'firebase/firestore'
 import { getStorage, ref, getDownloadURL } from 'firebase/storage'
-import { app } from '@/services/exportFirebase'
+import { app } from '@/services/firebase/exportFirebaseConfigs'
 
 interface imagesProps {
   [id: string]: string
 }
 
 interface ProductProps {
-  name: string
-  description: string
-  price: number
-  image: string
-  category: string
-  id: string
   available: boolean
-  stars: number
-  order_only: boolean
+  category: string
   daily_menu: boolean
+  description: string
+  id: string
+  name: string
+  order_only: boolean
+  price: number
+  stars: number
   weight: number
+  image: string
 }
-
 interface AllProductsProps {
   [product: string]: ProductProps
 }
 
+let updateProductInDBTeste = (values: any) => {
+  console.count()
+  console.log(values)
+}
+
 let Info_New_Collection = process.env.NEXT_PUBLIC_INFO_NEW_COLLECTION
-let newFolderNameImg = process.env.NEXT_PUBLIC_NEW_FOLDERNAMEIMG
 
 export async function FetchAllProducts() {
-  const getAllProducts = (): Promise<any> => {
-    return new Promise((resolve, reject) => {
-      try {
-        const infoDatabase = getFirestore(app)
-        const docCollection = collection(infoDatabase, `${Info_New_Collection}`)
+  const getAllProducts = async (): Promise<AllProductsProps> => {
+    const infoDatabase = getFirestore(app)
+    const docCollection = collection(infoDatabase, `${Info_New_Collection}`)
 
-        getDocs(docCollection)
-          .then((querySnapshot: QuerySnapshot<any>) => {
-            const products: any = {}
+    const querySnapshot = await getDocs(docCollection)
 
-            querySnapshot.forEach((doc: any) => {
-              if (doc.exists()) {
-                const data = doc.data()
-                products[data.id] = data
-              }
-            })
+    const products: any = {}
 
-            resolve(products)
-          })
-          .catch((error) => {
-            reject(`Erro ao buscar dados: ${error}`)
-          })
-      } catch (error) {
-        reject(`Erro ao buscar dados: ${error}`)
+    querySnapshot.forEach((doc) => {
+      if (doc.exists()) {
+        const data = doc.data()
+        let productId = data.id
+        products[productId] = data
       }
     })
+
+    return products
   }
 
-  const getImagesOfProducts = async ({ infoProducts }: AllProductsProps) => {
+  const getProductsWithImages = async (infoProducts: AllProductsProps) => {
     const storage = getStorage(app)
+    const updatedProducts: AllProductsProps = {}
 
-    let imagesPromises: imagesProps = {}
+    for (const productId in infoProducts) {
+      const product = infoProducts[productId]
 
-    try {
-      for (const product in infoProducts) {
-        const imageRef = ref(
-          storage,
-          `${newFolderNameImg}/${product}/imagem.jpg`,
-        )
-        const imageUrl = await getDownloadURL(imageRef)
-        imagesPromises = {
-          ...imagesPromises,
-          [product]: imageUrl,
+      if (!product.image) {
+        const imageRef = ref(storage, `Image_Products/${product.id}/imagem.jpg`)
+
+        try {
+          const imageUrl = await getDownloadURL(imageRef)
+
+          // Atualize o produto com a URL da imagem
+          const updatedProduct: ProductProps = { ...product, image: imageUrl }
+
+          // Chame a função para atualizar o produto no banco de dados (não implementada aqui)
+          updateProductInDBTeste(updatedProduct)
+
+          updatedProducts[productId] = updatedProduct
+        } catch (error) {
+          console.error(
+            `Erro ao buscar imagem para o produto ${product.id}: ${error}`,
+          )
         }
-      }
-
-      return imagesPromises
-    } catch (error) {
-      console.log(`Erro ao buscar imagens: ${error}`)
-    }
-
-    return imagesPromises
-  }
-
-  const joinInfoProduct = (info: AllProductsProps, img: imagesProps) => {
-    let newProductList = {}
-
-    for (let idProduct in info) {
-      newProductList = {
-        ...newProductList,
-        [idProduct]: {
-          ...info[idProduct],
-          image: img[idProduct],
-        },
+      } else {
+        // Se o produto já tiver uma imagem, não faz nada, apenas copia para os produtos atualizados
+        updatedProducts[productId] = product
       }
     }
 
-    return newProductList
+    return updatedProducts
   }
 
-  const allProducts = await getAllProducts()
+  try {
+    const allProducts = await getAllProducts()
 
-  const allImagesOfProducts: imagesProps = await getImagesOfProducts({
-    infoProducts: allProducts,
-  })
+    const productsWithImages = await getProductsWithImages(allProducts)
 
-  const products = joinInfoProduct(allProducts, allImagesOfProducts)
+    console.log('Finalizou')
 
-  const result: AllProductsProps = products
-
-  return result
+    return productsWithImages
+  } catch (error) {
+    console.error('Erro ao buscar produtos:', error)
+    throw error
+  }
 }

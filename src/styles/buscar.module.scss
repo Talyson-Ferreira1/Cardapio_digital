@@ -1,16 +1,13 @@
 @import '../app/globals.scss';
 
-.main {
+.container {
   @include heigth-page;
-  padding-top: 4rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  width: 100vw;
-  height: auto;
-  min-height: $size-header;
+  width: calc(100vw - 2rem);
+  padding-top: 6rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-template-rows: auto;
+  justify-items: center;
   gap: 2rem 1rem;
   position: relative;
 
@@ -21,17 +18,5 @@
     width: 100vw;
     text-align: center;
     font-size: 1.5rem;
-    margin: 0;
-  }
-}
-
-@media (max-width: 715px) {
-  .main {
-    grid-template-columns: repeat(auto-fill, minmax(100vw, 1fr));
-  }
-
-  .reset-styles a {
-    @include center-rows;
-    width: 100%;
   }
 }

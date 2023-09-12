@@ -11,15 +11,17 @@ import { home_button_routes } from '@/constants/app-router-home-button'
 import { tags_button_routes } from '@/constants/app-router-tags-button'
 import { footer_routes } from '@/constants/app-router-footer'
 
+import checkIsUserAuthenticated from '@/services/firebase/auth'
 import PrivateRoute from '@/components/private-route'
 import Header from '@/components/header'
 import TagsHeader from '@/components/nav'
 import Footer from '@/components/footer/index'
-import checkIsUserAuthenticated from '@/functions/check-is-user-authenticated'
 import ButtonGeneric from '@/components/generic-button/button'
 
-import './globals.scss'
 import { bar_search_routes } from '@/constants/app-router-bar-search'
+import { header_routes } from '@/constants/app-router-header'
+
+import './globals.scss'
 
 require('dotenv').config()
 
@@ -63,47 +65,54 @@ export default function RootLayout({
     routes: bar_search_routes,
   })
 
+  const acceptsHeader = acceptsButton({
+    asPath: pathName,
+    routes: header_routes,
+  })
+
   return (
     <Providers>
       <html lang="en" className="reset-html">
         <body className="reset-styles">
-          <header className="header-layout">
-            <Header hideBar={acceptsSearch} />
+          {acceptsHeader && (
+            <header className="header-layout">
+              <Header hideBar={acceptsSearch} />
 
-            {acceptsReturnButton && (
-              <ButtonGeneric
-                src_image={'/icons/arrow-left.svg'}
-                className={'button_return_style'}
-                pathName={pathName}
-                ReturnToLastPage={true}
-              />
-            )}
+              {acceptsReturnButton && (
+                <ButtonGeneric
+                  src_image={'/icons/arrow-left.svg'}
+                  className={'button_return_style'}
+                  pathName={pathName}
+                  ReturnToLastPage={true}
+                />
+              )}
+              {acceptsBagButton && (
+                <ButtonGeneric
+                  src_image={'/icons/bag.svg'}
+                  pathName={'/sacola'}
+                  className={'button_open_bag_shopping'}
+                />
+              )}
 
-            {acceptsBagButton && (
-              <ButtonGeneric
-                src_image={'/icons/bag.svg'}
-                pathName={'/sacola'}
-                className={'button_open_bag_shopping'}
-              />
-            )}
+              {userAuthenticated && !isDashboardPage && (
+                <ButtonGeneric
+                  src_image={'/icons/dashboard.svg'}
+                  pathName={'/dashboard'}
+                  nameButton={'Dashboard'}
+                  className={'button_go_to_dashboard'}
+                />
+              )}
+            </header>
+          )}
 
-            {acceptsHomeButton && (
-              <ButtonGeneric
-                src_image={'/icons/home.svg'}
-                pathName={'/'}
-                className={'button_home_style'}
-              />
-            )}
+          {acceptsHomeButton && (
+            <ButtonGeneric
+              src_image={'/icons/home.svg'}
+              pathName={'/'}
+              className={'button_home_style'}
+            />
+          )}
 
-            {userAuthenticated && !isDashboardPage && (
-              <ButtonGeneric
-                src_image={'/icons/dashboard.svg'}
-                pathName={'/dashboard'}
-                nameButton={'Dashboard'}
-                className={'button_go_to_dashboard'}
-              />
-            )}
-          </header>
           {acceptsTagsButton && <TagsHeader />}
 
           {isPublicPage && children}

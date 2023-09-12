@@ -2,6 +2,8 @@
 
 .footer {
   @include center-column;
+  position: absolute;
+  bottom: 0;
   width: 100vw;
   height: 150px;
   background-color: $gray-color-5;
@@ -15,6 +17,8 @@
 
   button {
     @include button-style;
+    @include center-rows;
+    gap: 1rem;
     width: 100px;
     background-color: $gray-color-3;
   }

@@ -3,4 +3,5 @@
 .main {
   @include center-column;
   @include size-heigth-auto;
+  @include heigth-page;
 }

@@ -1,6 +1,8 @@
 @import '../app/globals.scss';
 
 .container {
+  @include heigth-page;
+  padding-top: 3rem;
   width: 100vw;
   height: $size-page;
   display: flex;
@@ -8,7 +10,6 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
-  padding: 3rem 1rem 0 1rem;
   background: linear-gradient(
     90deg,
     hsla(213, 77%, 14%, 1) 0%,
@@ -43,6 +44,8 @@
 /* --------------------------- Edit Product Styles --------------------------- */
 
 .main {
+  @include heigth-page;
+  padding-top: 100px;
   width: 100vw;
   height: auto;
   min-height: calc(100vh - $size-header);
@@ -52,7 +55,6 @@
   justify-items: center;
   gap: 2rem 1rem;
   color: black;
-  padding: 100px 1rem 1rem 1rem;
   position: relative;
 }
 

@@ -113,8 +113,8 @@ export default function DashboardProductCard({
                   <Image
                     src={currentProduct.image}
                     alt="product image"
-                    fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    fill
                   />
                 </div>
                 <h2 className={styles.name}>Nome: {currentProduct.name}</h2>

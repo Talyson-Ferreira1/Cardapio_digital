@@ -1,9 +1,9 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { ReactNode, useEffect } from 'react'
-import checkIsUserAuthenticated from '@/functions/check-is-user-authenticated'
 import { APP_ROUTES } from '@/constants/app-routes'
 import LoadingNullPage from '../Loading'
+import checkIsUserAuthenticated from '@/services/firebase/auth'
 
 type PrivateRouteProps = {
   children: ReactNode

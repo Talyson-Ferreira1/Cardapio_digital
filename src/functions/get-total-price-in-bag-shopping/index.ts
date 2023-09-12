@@ -1,6 +1,6 @@
 export function getTotalPrices() {
   const productsInBagShopping = localStorage.getItem('Shopping cart')
-  const allProducts = localStorage.getItem('All products')
+  const allProducts = sessionStorage.getItem('All products')
 
   let totalPrices = 0
 

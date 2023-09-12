@@ -2,7 +2,8 @@
 
 .container {
   @include size-heigth-auto;
-  padding: 3rem 0 0 0;
+  @include heigth-page;
+  padding-top: 3rem;
 }
 
 .form {

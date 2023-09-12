@@ -4,6 +4,8 @@ import Link from 'next/link'
 
 import {
   FetchProductsCategory,
+  GetAllproductsOfDailyMenu,
+  SaveDataInLocalStorage,
   VerifyIfExistDataInStorage,
 } from '@/functions/dataInStorage'
 import { FetchAllProducts } from '@/functions/Fetch-all-products-in-db'
@@ -14,6 +16,7 @@ import LoadingHorizontalCard from '../Loading/loading-Horizontal'
 import LoadingVerticalCard from '../Loading/loading-vertical'
 
 import styles from '../../styles/render-products.module.scss'
+import { fetchProductsAndUpdateIfNotExistsImage } from '@/services/firebase/firestore'
 
 interface ProductProps {
   [product: string]: {
@@ -30,10 +33,11 @@ interface ProductProps {
 
 interface props {
   category: 'portions' | 'recommendation' | 'meals' | 'drinks' | 'desserts'
-  direction: 'horizontal' | 'vertical'
+  direction?: 'horizontal' | 'vertical'
+  dailyMenu?: boolean
 }
 
-export default function RenderProducts({ category, direction }: props) {
+export default function RenderProducts({ category, dailyMenu }: props) {
   const [products, setProducts] = useState<ProductProps>({})
   const [directionFlex, setDirectionFlex] = useState('')
 
@@ -82,6 +86,46 @@ export default function RenderProducts({ category, direction }: props) {
     }
   }
 
+  const fetchData = async () => {
+    let verify = VerifyIfExistDataInStorage()
+    let getProducts
+
+    if (verify) {
+      getProducts = FetchProductsCategory({ category: `${category}` })
+    } else {
+      const productsFromDB = await fetchProductsAndUpdateIfNotExistsImage()
+      getProducts = FetchProductsCategory({
+        data: productsFromDB,
+        category: `${category}`,
+      })
+    }
+
+    setProducts(getProducts)
+  }
+
+  const fetchDailyMenu = async () => {
+    let verify = VerifyIfExistDataInStorage()
+
+    if (verify) {
+      const productsFromStorage = GetAllproductsOfDailyMenu()
+      setProducts(productsFromStorage)
+    } else {
+      const productsFromDB = await fetchProductsAndUpdateIfNotExistsImage()
+      let DailyMenu = GetAllproductsOfDailyMenu(productsFromDB)
+      setProducts(DailyMenu)
+
+      SaveDataInLocalStorage(productsFromDB)
+    }
+  }
+
+  const ReloadProducts = () => {
+    if (dailyMenu) {
+      fetchDailyMenu()
+    } else {
+      fetchData()
+    }
+  }
+
   useEffect(() => {
     const handleResize = () => {
       window.innerWidth > 715
@@ -92,27 +136,11 @@ export default function RenderProducts({ category, direction }: props) {
     handleResize()
 
     window.addEventListener('resize', handleResize)
+    ReloadProducts()
   }, [])
 
   useEffect(() => {
-    const fetchData = async () => {
-      let verify = VerifyIfExistDataInStorage()
-      let getProducts
-
-      if (verify) {
-        getProducts = FetchProductsCategory({ category: `${category}` })
-      } else {
-        const productsFromDB = await FetchAllProducts()
-        getProducts = FetchProductsCategory({
-          data: productsFromDB,
-          category: `${category}`,
-        })
-      }
-
-      setProducts(getProducts)
-    }
-
-    fetchData()
+    ReloadProducts()
   }, [category])
 
   return (

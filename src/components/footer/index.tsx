@@ -2,23 +2,28 @@
 import { useEffect, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 
-import { LogOut } from '@/services/authServices'
-import checkIsUserAuthenticated from '@/functions/check-is-user-authenticated'
+import { LogOut } from '@/services/firebase/auth'
 
 import styles from '../../styles/footter.module.scss'
+import SpinnerButton from '../Loading/spinner'
+import checkIsUserAuthenticated from '@/services/firebase/auth'
 
 export default function Footer() {
-  const [showLogin, setShowLogin] = useState(true)
+  const [showLogin, setShowLogin] = useState<boolean>(true)
+  const [showSpinner, setShowSpinner] = useState<boolean>(true)
   const route = useRouter()
   const pathName = usePathname()
   const isLoginPage = pathName === '/login' ? false : true
 
   async function UserLogOut() {
+    setShowSpinner(true)
     await LogOut()
+    setShowSpinner(false)
     Reload()
   }
 
   function UserLogin() {
+    setShowSpinner(true)
     route.push('/login')
   }
 
@@ -42,6 +47,8 @@ export default function Footer() {
 
   useEffect(() => {
     CheckAuth()
+
+    setShowSpinner(false)
   }, [pathName])
 
   return (
@@ -52,9 +59,15 @@ export default function Footer() {
       {isLoginPage && (
         <>
           {showLogin ? (
-            <button onClick={UserLogin}>LogIn</button>
+            <button onClick={UserLogin}>
+              {showSpinner && <SpinnerButton />}
+              LogIn
+            </button>
           ) : (
-            <button onClick={UserLogOut}>LogOut</button>
+            <button onClick={UserLogOut}>
+              {showSpinner && <SpinnerButton />}
+              LogOut
+            </button>
           )}
         </>
       )}

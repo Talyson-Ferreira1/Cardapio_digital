@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import * as Yup from 'yup'
+import { app } from '@/services/firebase/exportFirebaseConfigs'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
-import { app } from '@/services/exportFirebase'
-import { getStorage, ref, uploadBytes } from 'firebase/storage'
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
 import { getFirestore, collection, setDoc, doc } from 'firebase/firestore'
 
 import { ToastContainer, toast } from 'react-toastify'
@@ -25,7 +25,7 @@ export default function CadastrarProduto() {
   const [existImage, setExistImage] = useState<boolean>(false)
   const [image, setImage] = useState<any>({})
   const [activeSpinner, setActiveSpinner] = useState<boolean>(false)
-  const notifySucess = () => toast('Produto cadastrado')
+  const notifySuccess = () => toast('Produto cadastrado')
   const notifyError = () => toast('Erro ao cadastrar')
 
   const SendProductToDB = async (values: any) => {
@@ -35,7 +35,7 @@ export default function CadastrarProduto() {
     const SendProductCollection = collection(db, 'Products')
 
     try {
-      const newValues = {
+      let newValues: any = {
         name: values.name,
         description: values.description,
         price: values.price,
@@ -48,19 +48,31 @@ export default function CadastrarProduto() {
         weight: values.weight,
       }
 
-      const docRef = doc(SendProductCollection, `${newValues.id}`)
+      // Referência para o local de armazenamento da imagem
       const storageRef = ref(storage, `Image_Products/${newValues.id}`)
+      const imageRef = ref(storageRef, `imagem.jpg`)
       const imageBlob = new Blob([image.target.files[0] as File], {
         type: image.target.files[0].type,
       })
 
-      const imageRef = ref(storageRef, `imagem.jpg`)
+      // Faz o upload da imagem para o armazenamento
       await uploadBytes(imageRef, imageBlob)
 
+      // Obtém a URL da imagem após o upload
+      const imageUrl = await getDownloadURL(imageRef)
+
+      console.log('id: ' + newValues.id)
+
+      // Adiciona a URL da imagem ao objeto 'newValues'
+      newValues.image = imageUrl
+
+      // Grava as informações do produto no Firestore
+      const docRef = doc(SendProductCollection, newValues.id)
       await setDoc(docRef, newValues)
 
-      console.log('Cadastrado')
-      notifySucess()
+      console.log('Produto cadastrado com sucesso')
+
+      notifySuccess()
     } catch (error) {
       console.error('Erro ao cadastrar produto:', error)
       notifyError()
@@ -154,6 +166,7 @@ export default function CadastrarProduto() {
                   className={styles.image}
                   type="file"
                   name="image"
+                  id="image"
                   accept=".jpg, .jpeg, .png, .webp"
                   onBlur={handleImageChange}
                 />
@@ -182,6 +195,7 @@ export default function CadastrarProduto() {
 
               <Field
                 as="select"
+                id="category"
                 name="category"
                 className={styles.category_product}
               >
@@ -209,6 +223,7 @@ export default function CadastrarProduto() {
                   className={styles.input}
                   type="text"
                   name="name"
+                  id="name"
                   required
                 />
                 <span>Nome do produto</span>
@@ -228,6 +243,7 @@ export default function CadastrarProduto() {
                   className={styles.input}
                   type="textArea"
                   name="description"
+                  id="description"
                   required
                 />
                 <span>Descrição do produto</span>
@@ -250,6 +266,7 @@ export default function CadastrarProduto() {
                   type="number"
                   pattern="[0-9]*"
                   name="weight"
+                  id="weight"
                   required
                 />
                 <span>
@@ -274,6 +291,7 @@ export default function CadastrarProduto() {
                   type="number"
                   pattern="[0-9]*"
                   name="price"
+                  id="price"
                   required
                 />
                 <span>

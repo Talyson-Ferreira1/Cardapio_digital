@@ -34,7 +34,7 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
   const notifyError = () => toast('Limite máximo de 5 produtos')
 
   const getDataInCache = () => {
-    let dataInStorage = localStorage.getItem('All products')
+    let dataInStorage = sessionStorage.getItem('All products')
 
     dataInStorage === null
       ? router.back()
@@ -64,6 +64,11 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     getDataInCache()
+
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    })
   }, [])
 
   return (
