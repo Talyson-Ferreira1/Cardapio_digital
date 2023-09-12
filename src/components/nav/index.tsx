@@ -20,16 +20,16 @@ export default function TagsHeader() {
       pathName: '/',
     },
 
-    dessertsProps: {
-      ilustration: '/ilustracoes/sobremesa.png',
-      name: 'Sobremesas',
-      pathName: '/sobremesas',
-    },
-
     mealsProps: {
       ilustration: '/ilustracoes/refeicoes.png',
       name: 'Refeições',
       pathName: '/refeicoes',
+    },
+
+    dessertsProps: {
+      ilustration: '/ilustracoes/sobremesa.png',
+      name: 'Sobremesas',
+      pathName: '/sobremesas',
     },
 
     drinksProps: {
