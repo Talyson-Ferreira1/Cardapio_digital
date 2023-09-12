@@ -38,9 +38,13 @@ export default function ButtonTag({
       if (pathNamePage === pathName) {
         tag.style.border = ' 1px solid #96969685'
         tag.style.transform = ' scale(1.1)'
+        tag.style.background = '#f8da5f'
+        tag.style.boxShadow = ' 4px 4px 9px 1px rgba(0, 0, 0, 0.39)'
       } else {
         tag.style.border = ' none'
         tag.style.transform = ' scale(1)'
+        tag.style.background = '#eabf16'
+        tag.style.boxShadow = ' 4px 4px 9px 1px rgba(0, 0, 0, 0.20)'
       }
     }
   }, [pathNamePage])

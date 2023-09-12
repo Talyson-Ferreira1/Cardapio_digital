@@ -4,12 +4,14 @@
   place-self: start;
   display: flex;
   width: calc(100vw - 2rem);
-  max-height: 3rem;
+  max-height: 4rem;
   align-items: center;
   gap: 2rem;
-  padding: 3rem 1rem 1rem 1rem;
+  padding: 3rem 1rem 1.5rem 1rem;
   overflow-x: auto;
   overflow-y: hidden;
+  /*   background-color: white;
+  border-bottom: 2px solid $gray-color-3; */
 
   &::-webkit-scrollbar {
     width: 5px;
@@ -36,17 +38,29 @@
 }
 
 .tag_button {
-  @include button-style;
   @include center-evenly;
+  border-radius: 20px;
+  border: none;
+  color: white;
+  font-weight: 700;
+  font-size: large;
+  padding: 1rem;
   width: auto;
   height: 3rem;
   min-width: 150px;
   background-color: $cor-primaria;
   transition: all 0.4s;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.03);
+  }
 }
 
 .tag_button .selected {
   border: 1px solid black;
+  background: $cor-secundaria;
 }
 
 .container_loader_tags {

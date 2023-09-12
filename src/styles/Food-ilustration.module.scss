@@ -1,0 +1,45 @@
+@import '../app/globals.scss';
+
+.container_All {
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
+
+.container {
+  position: relative;
+  position: absolute;
+  z-index: -1;
+}
+
+.container_1 {
+  @extend .container;
+  width: 50vw;
+  height: 50vw;
+  top: 20vh;
+  left: -25vw;
+  filter: blur(5px);
+}
+
+.container_2 {
+  @extend .container;
+  width: 45vw;
+  height: 45vw;
+  top: 60vh;
+  right: -20vw;
+  transform: rotate(10deg);
+  filter: blur(5px);
+}
+
+.container_3 {
+  @extend .container;
+  width: 35vw;
+  height: 35vw;
+  top: 80vh;
+  left: -15vw;
+  transform: rotate(10deg);
+  filter: blur(5px);
+}
