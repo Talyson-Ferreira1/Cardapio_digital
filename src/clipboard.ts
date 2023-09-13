@@ -1,5 +1,22 @@
 /* 
 
+  <h2>Sua sacola está vazia</h2>
+
+  <Image
+    src="/ilustracoes/bag-shopping.png"
+    alt="empty bag ilustration"
+    width="200"
+    height="150"
+    priority
+  />
+
+ <Image
+          src={productImage}
+          alt="Product image"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+
 
 portions
 recommendation

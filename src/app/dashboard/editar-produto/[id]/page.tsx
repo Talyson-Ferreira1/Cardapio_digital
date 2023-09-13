@@ -1,3 +1,3 @@
 export default function ProductEdit() {
-  return <h1>Edit</h1>
+  return <h1>Em desenvolvimento</h1>
 }

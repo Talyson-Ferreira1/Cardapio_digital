@@ -1,9 +1,11 @@
 'use client'
-import HorizontalProduct from '@/components/cards-product/horizontal-product-card'
+import { useContext, useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+
 import { SearchContext } from '@/context/user'
 import { FormatCoin } from '@/functions/format-coin'
-import Link from 'next/link'
-import { useContext, useEffect, useState } from 'react'
+import HorizontalProduct from '@/components/cards-product/horizontal-product-card'
 
 import styles from '@/styles/buscar.module.scss'
 
@@ -27,25 +29,20 @@ interface AllProductsProps {
 
 export default function Search() {
   const [name, setName] = useState('')
+  const [counter, setCounter] = useState(false)
   const { productName } = useContext(SearchContext)
   const [products, setProducts] = useState<AllProductsProps>({})
+  const container = useRef<HTMLButtonElement | null>(null)
 
   const hasAllLetter = (value1: string, value2: string) => {
-    let array1 = value1.toLowerCase().split('')
-    let array2 = value2.toLowerCase().split('')
-
-    let result = true
-    let index = 0
-
-    for (let value of array2) {
-      if (array1.length === index) break
-
-      if (!array1.includes(value)) {
-        result = false
-      }
-
-      index++
+    const removeAccents = (str: string) => {
+      return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     }
+
+    let inputValue = removeAccents(value1).toLowerCase()
+    let ProductName = removeAccents(value2).toLowerCase()
+
+    let result = ProductName.includes(inputValue)
 
     return result
   }
@@ -58,9 +55,17 @@ export default function Search() {
   useEffect(() => {
     setName(productName)
   }, [productName])
+
+  useEffect(() => {
+    if (container.current != null) {
+      let element = container.current
+      element.childElementCount === 1 ? setCounter(true) : setCounter(false)
+    }
+  }, [name, products])
+
   return (
-    <main className={styles.container}>
-      <h1> Procurar produto</h1>
+    <main ref={container} className={styles.container}>
+      {!counter && <h1> Procurar produto</h1>}
       <>
         {products ? (
           <>
@@ -88,9 +93,23 @@ export default function Search() {
             })}
           </>
         ) : (
-          <h1>Nada</h1>
+          <h2>Sem Produtos</h2>
         )}
       </>
+      {counter && (
+        <div className={styles.no_products}>
+          <div>
+            <Image
+              src="/ilustracoes/empty-bag.png"
+              alt="no product ilustration"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          </div>
+
+          <h2>Infelizmente, não temos esse produto</h2>
+        </div>
+      )}
     </main>
   )
 }

@@ -5,6 +5,7 @@ export const APP_ROUTES = {
     editar: { name: '/dashboard/editar-produto' },
     delete: { name: '/dashboard/deletar-produto' },
     menu: { name: '/dashboard/cardapio-do-dia' },
+    AreaDeTestes: { name: '/teste' },
   },
 
   public: {

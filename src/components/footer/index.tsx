@@ -7,6 +7,7 @@ import { LogOut } from '@/services/firebase/auth'
 import styles from '../../styles/footter.module.scss'
 import SpinnerButton from '../Loading/spinner'
 import checkIsUserAuthenticated from '@/services/firebase/auth'
+import Link from 'next/link'
 
 export default function Footer() {
   const [showLogin, setShowLogin] = useState<boolean>(true)
@@ -53,9 +54,6 @@ export default function Footer() {
 
   return (
     <footer className={styles.footer}>
-      <div></div>
-      <div>Link do desenvolvedor</div>
-      <div>copyright</div>
       {isLoginPage && (
         <>
           {showLogin ? (
@@ -69,6 +67,16 @@ export default function Footer() {
               LogOut
             </button>
           )}
+          <div>
+            © copyright @ 2023 by
+            <Link
+              href="https://www.linkedin.com/in/talyson-ferreira/"
+              target="_blank"
+            >
+              <span> Talyson Ferreira</span>
+            </Link>{' '}
+            | all rights reserved!
+          </div>
         </>
       )}
     </footer>
