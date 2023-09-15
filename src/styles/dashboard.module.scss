@@ -271,6 +271,13 @@
 .container_timetables {
   @include heigth-page;
 
+  h1 {
+    width: 100%;
+    font-size: $clamp-h1;
+
+    text-align: center;
+  }
+
   .form {
     @include center-column;
     width: 100vw;
