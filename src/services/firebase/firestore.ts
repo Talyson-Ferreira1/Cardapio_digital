@@ -10,6 +10,29 @@ import { app } from '@/services/firebase/exportFirebaseConfigs'
 
 import { getImages } from './storage'
 
+interface AllHours {
+  segunda_abertura: string
+  segunda_fechamento: string
+
+  terca_abertura: string
+  terca_fechamento: string
+
+  quarta_abertura: string
+  quarta_fechamento: string
+
+  quinta_abertura: string
+  quinta_fechamento: string
+
+  sexta_abertura: string
+  sexta_fechamento: string
+
+  sabado_abertura: string
+  sabado_fechamento: string
+
+  domingo_abertura: string
+  domingo_fechamento: string
+}
+
 interface ProductProps {
   available: boolean
   category: string
@@ -29,6 +52,8 @@ interface AllProductsProps {
 }
 
 let Info_New_Collection = process.env.NEXT_PUBLIC_INFO_NEW_COLLECTION
+let Info_TimeTable_Collection =
+  process.env.NEXT_PUBLIC_INFO_TIMETABLE_COLLECTION
 
 export async function updatesProductDataInTheFirestore(
   dataProduct: Partial<ProductProps>,
@@ -80,6 +105,61 @@ export async function fetchAllProducts() {
     return products
   } catch (error) {
     console.error('Erro ao buscar produtos:', error)
+    throw error
+  }
+}
+
+export async function updateTimeTable(data: any) {
+  let result
+
+  try {
+    const infoDatabase = getFirestore(app)
+    const docCollection = collection(
+      infoDatabase,
+      `${Info_TimeTable_Collection}`,
+    )
+
+    const documentRef = doc(docCollection, 'hours')
+    const documentSnapshot = await getDoc(documentRef)
+
+    if (documentSnapshot.exists()) {
+      await updateDoc(documentRef, data)
+
+      console.log('Documento atualizado com sucesso:')
+
+      result = true
+    } else {
+      console.log('Documento não encontrado.')
+      result = false
+    }
+  } catch (error) {
+    console.error('Erro ao buscar/atualizar documento:', error)
+    result = false
+  }
+
+  return result
+}
+
+export async function fetchTimeTable() {
+  try {
+    const infoDatabase = getFirestore(app)
+    const docCollection = collection(
+      infoDatabase,
+      `${Info_TimeTable_Collection}`,
+    )
+
+    const documentRef = doc(docCollection, 'hours')
+
+    const documentSnapshot = await getDoc(documentRef)
+
+    if (documentSnapshot.exists()) {
+      let data = documentSnapshot.data()
+
+      return data
+    } else {
+      console.log('Documento não existe')
+    }
+  } catch (error) {
     throw error
   }
 }

@@ -11,6 +11,7 @@ import { UpdateBagShopping } from '@/functions/update-bag-shopping'
 
 import styles from '@/styles/product-details.module.scss'
 import 'react-toastify/dist/ReactToastify.css'
+import { CheckisOpenStore } from '@/functions/check-is-open'
 
 type ProductProps = {
   name: string
@@ -49,7 +50,14 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
     }
   }
 
-  const openWhatsApp = () => {
+  const openWhatsApp = async () => {
+    let verifyTimetable = await CheckisOpenStore()
+
+    if (!verifyTimetable) {
+      router.push('/horarios-de-funcionamento')
+      return
+    }
+
     if (data) {
       const message = `Olá! Gostaria de fazer um pedido. \n \n *1 X* - *${data?.name}* : R$: ${FormatCoin(
         data.price,

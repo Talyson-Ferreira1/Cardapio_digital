@@ -1,7 +1,8 @@
+import { CheckisOpenStore } from '../check-is-open'
 import { FormatCoin } from '../format-coin'
 import { getTotalPrices } from '../get-total-price-in-bag-shopping'
 
-export function sendRequestByWhatsapp() {
+export async function sendRequestByWhatsapp() {
   let getBagShoppingInLocStorage = localStorage.getItem('Shopping cart')
   let getAllProductsInLocStorage = sessionStorage.getItem('All products')
   let message = '*Olá! Gostaria de fazer um pedido*.\n \n'
@@ -43,4 +44,6 @@ export function sendRequestByWhatsapp() {
     const url = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`
     window.open(url, '_blank')
   }
+
+  return true
 }

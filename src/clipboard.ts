@@ -1,4 +1,30 @@
-/* 
+/*
+ ---------------- Input  hours ------------------
+
+  <label htmlFor="abertura">
+  <Field
+    type="time"
+    min="00:00"
+    max="23:59"
+    id="abertura"
+    name="abertura"
+    required
+    className={styles.input}
+  />
+</label>
+<ErrorMessage
+  className={styles.error_cadastrar}
+  name="abertura"
+  required
+  component="div"
+/>
+
+
+
+
+
+
+
 
   <h2>Sua sacola está vazia</h2>
 
@@ -11,11 +37,11 @@
   />
 
  <Image
-          src={productImage}
-          alt="Product image"
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
+    src={productImage}
+    alt="Product image"
+    fill
+    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+  />
 
 
 portions

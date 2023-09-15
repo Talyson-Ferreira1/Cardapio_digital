@@ -34,7 +34,11 @@ export default function ButtonGeneric({
     }
 
     if (ReturnToLastPage) {
-      router.back()
+      if (router.back() != undefined) {
+        router.back()
+      } else {
+        router.push('/')
+      }
     }
   }
 

@@ -20,6 +20,7 @@ export default function Dashboard() {
           <ButtonDashBoard href="editar-produto" name="Editar produtos" />
           <ButtonDashBoard href="deletar-produto" name="Deletar produtos" />
           <ButtonDashBoard href="cardapio-do-dia" name="Cardápio do dia" />
+          <ButtonDashBoard href="horarios" name="Horário de funcionamento" />
         </main>
       )}
     </>

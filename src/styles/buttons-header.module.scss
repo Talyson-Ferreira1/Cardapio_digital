@@ -38,3 +38,99 @@
   background: transparent;
   right: 2rem;
 }
+
+/* ------------------------------------ Button open and closed ------------------------------------ */
+
+.buttonOpenClosed {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 7rem;
+  height: auto;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+}
+
+.buttonClosed {
+  @extend .buttonOpenClosed;
+  @include center-rows;
+  background: $gray-color-1;
+  gap: 1rem;
+  border: 1px solid scale-color($red-color-3, $lightness: 80%);
+
+  span {
+    font-weight: 700;
+    color: scale-color($red-color-3, $lightness: 85%);
+    text-shadow:
+      0 0 0 transparent,
+      0 0 10px $red-color-3,
+      /*0 5px 10px rgba(scale-color($red-color-3, $lightness: -80%),1),*/ 0 0
+        20px rgba($red-color-3, 0.5),
+      0 0 40px rgba($red-color-3, 1),
+      0 0 100px rgba($red-color-3, 1),
+      0 0 200px rgba($red-color-3, 1),
+      0 0 300px rgba($red-color-3, 1),
+      0 0 500px rgba($red-color-3, 1),
+      0 0 1000px rgba($red-color-3, 1);
+  }
+
+  div {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: scale-color($red-color-3, $lightness: 85%);
+    box-shadow:
+      0 0 0 transparent,
+      0 0 10px $red-color-3,
+      /*0 5px 10px rgba(scale-color($red-color-3, $lightness: -80%),1),*/ 0 0
+        20px rgba($red-color-3, 0.5),
+      0 0 40px rgba($red-color-3, 1),
+      0 0 100px rgba($red-color-3, 1),
+      0 0 200px rgba($red-color-3, 1),
+      0 0 300px rgba($red-color-3, 1),
+      0 0 500px rgba($red-color-3, 1),
+      0 0 1000px rgba($red-color-3, 1);
+  }
+}
+
+.buttonOpen {
+  @extend .buttonOpenClosed;
+  @include center-rows;
+  background: $gray-color-1;
+  gap: 1rem;
+  border: 1px solid scale-color($green-color-3, $lightness: 80%);
+
+  span {
+    font-weight: 700;
+    color: scale-color($green-color-3, $lightness: 85%);
+    text-shadow:
+      0 0 0 transparent,
+      0 0 10px $green-color-3,
+      /*0 5px 10px rgba(scale-color($green-color-3, $lightness: -80%),1),*/ 0 0
+        20px rgba($green-color-3, 0.5),
+      0 0 40px rgba($green-color-3, 1),
+      0 0 100px rgba($green-color-3, 1),
+      0 0 200px rgba($green-color-3, 1),
+      0 0 300px rgba($green-color-3, 1),
+      0 0 500px rgba($green-color-3, 1),
+      0 0 1000px rgba($green-color-3, 1);
+  }
+
+  div {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: scale-color($green-color-3, $lightness: 85%);
+    box-shadow:
+      0 0 0 transparent,
+      0 0 10px $green-color-3,
+      /*0 5px 10px rgba(scale-color($green-color-3, $lightness: -80%),1),*/ 0 0
+        20px rgba($green-color-3, 0.5),
+      0 0 40px rgba($green-color-3, 1),
+      0 0 100px rgba($green-color-3, 1),
+      0 0 200px rgba($green-color-3, 1),
+      0 0 300px rgba($green-color-3, 1),
+      0 0 500px rgba($green-color-3, 1),
+      0 0 1000px rgba($green-color-3, 1);
+  }
+}

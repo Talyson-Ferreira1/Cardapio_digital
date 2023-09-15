@@ -22,6 +22,7 @@ import { bar_search_routes } from '@/constants/app-router-bar-search'
 import { header_routes } from '@/constants/app-router-header'
 
 import './globals.scss'
+import TimeTablesNeon from '@/components/horario-de-funcionamento'
 
 require('dotenv').config()
 
@@ -33,6 +34,7 @@ export default function RootLayout({
   const pathName = usePathname()
   const isPublicPage = checkIsPublicRoute(pathName)
   const isDashboardPage = pathName === '/dashboard' ? true : false
+  const isHomePage = pathName === '/' ? true : false
   const userAuthenticated = checkIsUserAuthenticated()
 
   const acceptsBagButton = acceptsButton({
@@ -77,6 +79,8 @@ export default function RootLayout({
           {acceptsHeader && (
             <header className="header-layout">
               <Header hideBar={acceptsSearch} />
+
+              {isHomePage && <TimeTablesNeon />}
 
               {acceptsReturnButton && (
                 <ButtonGeneric

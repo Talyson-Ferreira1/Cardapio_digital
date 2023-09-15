@@ -11,6 +11,8 @@ import TotalPrices from '@/components/total-prices'
 import ProductBagLoading from '@/components/Loading/loading-bag-product'
 
 import styles from '@/styles/sacola.module.scss'
+import { CheckisOpenStore } from '@/functions/check-is-open'
+import { useRouter } from 'next/navigation'
 
 type Product = {
   name: string
@@ -32,6 +34,7 @@ export default function BagShopping() {
   const [totalPrice, setTotalPrice] = useState<number>(0)
   const [hasProductsInBag, setHasProductsInBag] = useState<boolean>(false)
   const [productsInBag, setProductsInBag] = useState<ProductsProps>({})
+  const router = useRouter()
 
   const getPrices = () => {
     let totalpricesOfProducts = getTotalPrices()
@@ -43,7 +46,14 @@ export default function BagShopping() {
     setProductsInBag(AllProductsInBag)
   }
 
-  const fineshedRequest = () => {
+  const fineshedRequest = async () => {
+    let verifyTimetable = await CheckisOpenStore()
+
+    if (!verifyTimetable) {
+      router.push('/horarios-de-funcionamento')
+      return
+    }
+
     sendRequestByWhatsapp()
   }
 
