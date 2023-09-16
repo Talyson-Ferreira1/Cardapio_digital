@@ -3,7 +3,8 @@ import { useEffect, useRef, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import Image from 'next/image'
 
-import styles from '../../styles/navTags.module.scss'
+import styles from '@/styles/navTags.module.scss'
+import SpinnerButton from '../Loading/spinner'
 
 interface componentProps {
   ilustration: string
@@ -52,25 +53,11 @@ export default function ButtonTag({
   return (
     <button ref={button} onClick={handleClick} className={styles.tag_button}>
       {isLoading ? (
-        <div className={styles.container_loader_tags}>
-          <div>
-            <Image
-              src="/ilustracoes/loader.png"
-              alt="ilustration"
-              width="20"
-              height="20"
-              priority={true}
-            />
-          </div>
-        </div>
+        <SpinnerButton />
       ) : (
-        <Image
-          src={ilustration}
-          alt="ilustration"
-          width="20"
-          height="20"
-          priority={true}
-        />
+        <div>
+          <Image src={ilustration} alt="ilustration" fill priority={true} />
+        </div>
       )}
 
       <>{name}</>
