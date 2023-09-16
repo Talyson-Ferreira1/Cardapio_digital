@@ -46,7 +46,7 @@ export default function WarningPage() {
   return (
     <main className={styles.main}>
       <FoodIlustration />
-      <h1>Lamentamos, mas estamos fechados neste momento.</h1>
+      <h1>Lamentamos, mas estamos fechados no momento.</h1>
 
       <h2>Horários de funcionamento:</h2>
       <table border={1}>

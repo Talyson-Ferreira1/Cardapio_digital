@@ -18,19 +18,33 @@
     cursor: pointer;
   }
 
+  h4 {
+    text-align: center;
+    flex-wrap: nowrap;
+    width: 100vw;
+    font-size: clamp(8px, 0.6vw, 12px);
+    display: flex;
+
+    a {
+      text-align: center;
+      width: 100%;
+
+      span {
+        all: unset;
+        color: rgb(163, 163, 255);
+
+        &:hover {
+          color: rgb(195, 195, 253);
+        }
+      }
+    }
+  }
+
   button {
     @include button-style;
     @include center-rows;
     gap: 1rem;
     width: 100px;
     background-color: $gray-color-3;
-  }
-
-  span {
-    color: rgb(163, 163, 255);
-
-    &:hover {
-      color: rgb(195, 195, 253);
-    }
   }
 }

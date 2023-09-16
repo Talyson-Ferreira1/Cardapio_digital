@@ -67,16 +67,15 @@ export default function Footer() {
               LogOut
             </button>
           )}
-          <div>
-            © copyright @ 2023 by
+          <h4>
             <Link
               href="https://www.linkedin.com/in/talyson-ferreira/"
               target="_blank"
             >
-              <span> Talyson Ferreira</span>
-            </Link>{' '}
-            | all rights reserved!
-          </div>
+              © copyright @ 2023 by <span>Talyson Ferreira</span> | all rights
+              reserved!
+            </Link>
+          </h4>
         </>
       )}
     </footer>
