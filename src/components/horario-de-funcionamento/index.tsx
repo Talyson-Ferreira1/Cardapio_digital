@@ -1,6 +1,7 @@
 import { CheckisOpenStore } from '@/functions/check-is-open'
-import styles from '@/styles/buttons-header.module.scss'
 import { useEffect, useState } from 'react'
+
+import styles from '@/styles/buttons-header.module.scss'
 
 export default function TimeTablesNeon() {
   const [isOpen, setIsOpen] = useState<boolean>(true)

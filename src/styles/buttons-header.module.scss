@@ -42,13 +42,14 @@
 /* ------------------------------------ Button open and closed ------------------------------------ */
 
 .buttonOpenClosed {
-  position: absolute;
+  position: fixed;
   top: 1rem;
   left: 1rem;
   width: 7rem;
   height: auto;
   border-radius: 20px;
   padding: 0.5rem 1rem;
+  z-index: 10;
 }
 
 .buttonClosed {
