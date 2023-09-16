@@ -260,11 +260,17 @@ export default function CadastrarProduto() {
                 title="Insira o peso."
               >
                 <Field
+                  onInput={(e: any) => {
+                    const inputValue = parseFloat(e.target.value)
+                    if (isNaN(inputValue) || inputValue < 0) {
+                      e.target.value = ''
+                    }
+                  }}
                   className={styles.input}
-                  min="0"
+                  min={0}
                   step="0.01"
                   type="number"
-                  pattern="[0-9]*"
+                  pattern="[0-9]*\.?[0-9]+"
                   name="weight"
                   id="weight"
                   required
@@ -285,11 +291,17 @@ export default function CadastrarProduto() {
                 title="Insira um preço para o produto"
               >
                 <Field
+                  onInput={(e: any) => {
+                    const inputValue = parseFloat(e.target.value)
+                    if (isNaN(inputValue) || inputValue < 0) {
+                      e.target.value = ''
+                    }
+                  }}
                   className={styles.input}
-                  min="0"
+                  min={0}
                   step="0.01"
                   type="number"
-                  pattern="[0-9]*"
+                  pattern="[0-9]*\.?[0-9]+"
                   name="price"
                   id="price"
                   required

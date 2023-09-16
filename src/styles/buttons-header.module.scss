@@ -15,17 +15,18 @@
 .button_go_to_dashboard {
   @include center-column;
   gap: 0.5rem;
-  position: absolute;
+  position: fixed;
   width: 5rem;
   height: 5rem;
-  top: 10rem;
-  right: 2rem;
+  top: 6rem;
+  right: 0;
   background-color: $cor-primaria;
   border-radius: 10px;
   color: white;
   font-weight: 800;
   border: 1px solid $gray-color-3;
   box-shadow: $box-shadow-1;
+  z-index: 10;
   cursor: pointer;
 
   &:hover {

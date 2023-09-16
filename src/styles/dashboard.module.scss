@@ -4,7 +4,7 @@
   @include heigth-page;
   padding-top: 3rem;
   width: 100vw;
-  height: $size-page;
+  height: auto;
   display: flex;
   align-content: center;
   justify-content: center;
@@ -27,6 +27,7 @@
   @include center-column;
   width: auto;
   height: 150px;
+  padding: 0.5rem;
   min-width: 150px;
   border: none;
   color: white;

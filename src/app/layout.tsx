@@ -22,7 +22,6 @@ import { bar_search_routes } from '@/constants/app-router-bar-search'
 import { header_routes } from '@/constants/app-router-header'
 
 import './globals.scss'
-import TimeTablesNeon from '@/components/horario-de-funcionamento'
 
 require('dotenv').config()
 
