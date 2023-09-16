@@ -8,6 +8,7 @@ export const return_button_routes = {
 
   noButton: {
     home: '/',
+    timeTables: '/horarios-de-funcionamento',
     dashboard: '/dashboard',
     bebidas: '/bebidas',
     login: '/login',

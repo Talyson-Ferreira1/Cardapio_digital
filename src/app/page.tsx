@@ -21,7 +21,7 @@ export default function Home() {
       {isHomePage && pageLoaded && <TimeTablesNeon />}
       <main className={styles.main}>
         <h2>Cardápio do dia</h2>
-        <RenderProducts dailyMenu={true} category="portions" />
+        <RenderProducts dailyMenu={true} />
         <FoodIlustration />
       </main>
     </>

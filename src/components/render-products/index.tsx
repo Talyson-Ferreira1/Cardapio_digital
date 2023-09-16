@@ -32,7 +32,7 @@ interface ProductProps {
 }
 
 interface props {
-  category: 'portions' | 'recommendation' | 'meals' | 'drinks' | 'desserts'
+  category?: 'portions' | 'recommendation' | 'meals' | 'drinks' | 'desserts'
   direction?: 'horizontal' | 'vertical'
   dailyMenu?: boolean
 }
