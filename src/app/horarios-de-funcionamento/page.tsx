@@ -2,6 +2,9 @@
 import { fetchTimeTable } from '@/services/firebase/firestore'
 import { useEffect, useState } from 'react'
 
+import styles from '@/styles/timeTable.module.scss'
+import FoodIlustration from '@/components/ilustrations'
+
 interface AllHours {
   segunda_abertura: string
   segunda_fechamento: string
@@ -39,18 +42,22 @@ export default function WarningPage() {
   useEffect(() => {
     getTimeTableInDB()
   }, [])
+
   return (
-    <>
-      <h1>Infelizmente estamos fechado no momento.</h1>
+    <main className={styles.main}>
+      <FoodIlustration />
+      <h1>Lamentamos, mas estamos fechados neste momento.</h1>
 
       <h2>Horários de funcionamento:</h2>
       <table border={1}>
         <thead>
           <tr>
             <th>Dia da Semana</th>
-            <th>Abertura</th>
-            <th>Fechamento</th>
+            <th>Início</th>
+            <th>Encerramento</th>
           </tr>
+          <tr></tr>
+          <tr></tr>
         </thead>
         <tbody>
           <tr>
@@ -90,6 +97,6 @@ export default function WarningPage() {
           </tr>
         </tbody>
       </table>
-    </>
+    </main>
   )
 }

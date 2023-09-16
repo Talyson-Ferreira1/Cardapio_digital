@@ -10,6 +10,7 @@ export const footer_routes = {
     porcoes: '/porcoes',
     refeicoes: '/refeicoes',
     sobremesas: '/sobremesas',
+    timeTables: '/horarios-de-funcionamento',
   },
 
   noButton: {

@@ -12,6 +12,7 @@ export const header_routes = {
 
     dashboard: '/dashboard',
     dashboardChildrens: '/dashboard/',
+    timeTables: '/horarios-de-funcionamento',
   },
 
   noButton: {

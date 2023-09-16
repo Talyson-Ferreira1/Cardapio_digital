@@ -18,5 +18,6 @@ export const APP_ROUTES = {
     sobremesas: '/sobremesas',
     porcoes: '/porcoes',
     bebidas: '/bebidas',
+    timeTables: '/horarios-de-funcionamento',
   },
 }
