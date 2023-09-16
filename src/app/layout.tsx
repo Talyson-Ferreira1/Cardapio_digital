@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
 import { Providers } from '@/context'
@@ -34,7 +34,7 @@ export default function RootLayout({
   const pathName = usePathname()
   const isPublicPage = checkIsPublicRoute(pathName)
   const isDashboardPage = pathName === '/dashboard' ? true : false
-  const isHomePage = pathName === '/' ? true : false
+
   const userAuthenticated = checkIsUserAuthenticated()
 
   const acceptsBagButton = acceptsButton({
@@ -86,8 +86,6 @@ export default function RootLayout({
           {acceptsHeader && (
             <header className="header-layout">
               <Header hideBar={acceptsSearch} />
-
-              {isHomePage && <TimeTablesNeon />}
 
               {acceptsReturnButton && (
                 <ButtonGeneric

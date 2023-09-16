@@ -16,7 +16,6 @@ export default function Header({ hideBar }: Props) {
   const [spinnerLoading, setSpinnerLoading] = useState<boolean>(false)
   const { setProductName } = useContext(SearchContext)
   const router = useRouter()
-  const pathName = usePathname()
 
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     router.push('/buscar')

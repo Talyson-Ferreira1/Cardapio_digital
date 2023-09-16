@@ -1,10 +1,11 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import Image from 'next/image'
 
-import styles from '@/styles/navTags.module.scss'
 import SpinnerBarButton from '../Loading/spinner-bar'
+
+import styles from '@/styles/navTags.module.scss'
 
 interface componentProps {
   ilustration: string
@@ -50,7 +51,13 @@ export default function ButtonTag({
         </div>
       ) : (
         <div>
-          <Image src={ilustration} alt="ilustration" fill priority={true} />
+          <Image
+            src={ilustration}
+            alt="ilustration"
+            fill
+            sizes="(max-width: 20px) 100vw, (max-width: 768px) 20px, (max-width: 1200px) 10px, 6.6px"
+            priority={true}
+          />
         </div>
       )}
 
