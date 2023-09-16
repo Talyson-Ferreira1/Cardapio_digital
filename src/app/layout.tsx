@@ -75,6 +75,13 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="en" className="reset-html">
+        <head>
+          <title>Cardápio digital</title>
+          <meta
+            name="description"
+            content="Explore nosso cardápio digital e desfrute de uma variedade de pratos deliciosos. Personalize seu pedido e experimente uma experiência culinária única. Faça seu pedido agora e saboreie o melhor da nossa gastronomia."
+          />
+        </head>
         <body className="reset-styles">
           {acceptsHeader && (
             <header className="header-layout">
