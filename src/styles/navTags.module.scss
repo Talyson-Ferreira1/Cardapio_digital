@@ -10,8 +10,6 @@
   padding: 3rem 1rem 1.5rem 1rem;
   overflow-x: auto;
   overflow-y: hidden;
-  /*   background-color: white;
-  border-bottom: 2px solid $gray-color-3; */
 
   &::-webkit-scrollbar {
     width: 5px;
@@ -53,6 +51,7 @@
   cursor: pointer;
 
   div {
+    @include center-rows;
     position: relative;
     height: 100%;
     width: auto;
@@ -63,6 +62,20 @@
   &:focus {
     transform: scale(1.03);
   }
+}
+
+.tag_button.selected {
+  border: 1px solid #96969685;
+  transform: scale(1.1);
+  background-color: #f8da5f;
+  box-shadow: 4px 4px 9px 1px rgba(0, 0, 0, 0.39);
+}
+
+.tag_button.deselected {
+  border: none;
+  transform: scale(1);
+  background-color: #eabf16;
+  box-shadow: 4px 4px 9px 1px rgba(0, 0, 0, 0.2);
 }
 
 .tag_button .selected {

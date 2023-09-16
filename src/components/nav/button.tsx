@@ -4,7 +4,7 @@ import { useRouter, usePathname } from 'next/navigation'
 import Image from 'next/image'
 
 import styles from '@/styles/navTags.module.scss'
-import SpinnerButton from '../Loading/spinner'
+import SpinnerBarButton from '../Loading/spinner-bar'
 
 interface componentProps {
   ilustration: string
@@ -17,43 +17,37 @@ export default function ButtonTag({
   name,
   pathName,
 }: componentProps) {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const button = useRef<HTMLButtonElement | null>(null)
-
   const route = useRouter()
   const pathNamePage = usePathname()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const handleClick = () => {
     setIsLoading(true)
     route.push(pathName)
+    hideSpinner()
   }
 
-  useEffect(() => {
+  const hideSpinner = () => {
     if (pathNamePage === pathName) {
       setIsLoading(false)
     }
+  }
 
-    if (button.current != null) {
-      let tag: any = button.current
-
-      if (pathNamePage === pathName) {
-        tag.style.border = ' 1px solid #96969685'
-        tag.style.transform = ' scale(1.1)'
-        tag.style.background = '#f8da5f'
-        tag.style.boxShadow = ' 4px 4px 9px 1px rgba(0, 0, 0, 0.39)'
-      } else {
-        tag.style.border = ' none'
-        tag.style.transform = ' scale(1)'
-        tag.style.background = '#eabf16'
-        tag.style.boxShadow = ' 4px 4px 9px 1px rgba(0, 0, 0, 0.20)'
-      }
-    }
+  useEffect(() => {
+    hideSpinner()
   }, [pathNamePage])
 
   return (
-    <button ref={button} onClick={handleClick} className={styles.tag_button}>
+    <button
+      onClick={handleClick}
+      className={`${styles.tag_button} ${
+        pathNamePage === pathName ? styles.selected : styles.deselected
+      } `}
+    >
       {isLoading ? (
-        <SpinnerButton />
+        <div>
+          <SpinnerBarButton />
+        </div>
       ) : (
         <div>
           <Image src={ilustration} alt="ilustration" fill priority={true} />
