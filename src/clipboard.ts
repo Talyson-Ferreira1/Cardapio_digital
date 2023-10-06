@@ -1,4 +1,9 @@
 /*
+ * todo: Modificar a função de enviar mensagens para o whatsapp e enviar as observações
+ * Todo: Resgatar a localização do usuário.
+ */
+
+/*
  ---------------- Input  hours ------------------
 
   <label htmlFor="abertura">

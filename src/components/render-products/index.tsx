@@ -45,6 +45,25 @@ export default function RenderProducts({ category, dailyMenu }: props) {
     return FormatCoin(num)
   }
 
+  function TruncarString(inputString: string) {
+    if (inputString.length > 50) {
+      const words = inputString.split(' ')
+      let truncatedString = ''
+
+      for (const word of words) {
+        if (truncatedString.length + word.length + 3 <= 50) {
+          truncatedString += (truncatedString === '' ? '' : ' ') + word
+        } else {
+          break
+        }
+      }
+
+      return truncatedString + '...'
+    } else {
+      return inputString
+    }
+  }
+
   const renderedProducts = () => {
     if (Object.values(products).length > 0) {
       return Object.keys(products).map((productId) => {
@@ -61,7 +80,7 @@ export default function RenderProducts({ category, dailyMenu }: props) {
               <HorizontalProduct
                 productImage={currentProduct.image}
                 productName={currentProduct.name}
-                productDescription={currentProduct.description}
+                productDescription={TruncarString(currentProduct.description)}
                 productPrice={Format(currentProduct.price)}
               />
             )}
@@ -69,7 +88,7 @@ export default function RenderProducts({ category, dailyMenu }: props) {
               <VerticalProduct
                 productImage={currentProduct.image}
                 productName={currentProduct.name}
-                productDescription={currentProduct.description}
+                productDescription={TruncarString(currentProduct.description)}
                 productPrice={Format(currentProduct.price)}
               />
             )}

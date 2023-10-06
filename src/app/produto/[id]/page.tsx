@@ -5,13 +5,14 @@ import Image from 'next/image'
 
 import { FormatCoin } from '@/functions/format-coin'
 import { ToastContainer, toast } from 'react-toastify'
+import { UpdateBagShopping } from '@/functions/update-bag-shopping'
+import { CheckisOpenStore } from '@/functions/check-is-open'
+import { ModalRoot } from '@/components/modal/ModalRoot'
+import ModalObservations from '@/components/modal/ModalObservation'
 import RenderStar from '@/components/render-stars'
 
-import { UpdateBagShopping } from '@/functions/update-bag-shopping'
-
-import styles from '@/styles/product-details.module.scss'
 import 'react-toastify/dist/ReactToastify.css'
-import { CheckisOpenStore } from '@/functions/check-is-open'
+import styles from '@/styles/product-details.module.scss'
 
 type ProductProps = {
   name: string
@@ -29,6 +30,8 @@ type ProductProps = {
 
 export default function ProductDetails({ params }: { params: { id: string } }) {
   const [data, setData] = useState<ProductProps>()
+  const [isOpenModal, setIsOpenModal] = useState(false)
+
   let order_only = data?.order_only
   const router = useRouter()
   const notifySucess = () => toast('Produto adicionado')
@@ -40,6 +43,10 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
     dataInStorage === null
       ? router.back()
       : setData(JSON.parse(dataInStorage)[params.id])
+  }
+
+  const openModalObs = () => {
+    setIsOpenModal(true)
   }
 
   const saveProductInBag = () => {
@@ -79,67 +86,79 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
     })
   }, [])
 
+  const closeModal = () => {
+    setIsOpenModal(false)
+  }
+
   return (
-    <main className={styles.container}>
-      <div className="container-toast">
-        <ToastContainer
-          position="top-right"
-          autoClose={1000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-        />
-      </div>
+    <>
       {data != undefined && (
-        <>
-          <div
-            className={styles.image}
-            style={{ backgroundImage: `url(${data.image})` }}
-          >
-            <Image
-              src={data.image}
-              alt="product image"
-              width={430}
-              height={430}
-              priority
-            />
-          </div>
-          <div className={styles.info}>
-            <h1>{data.name}</h1>
-            <p>{data.description}</p>
-            {order_only && <h3> Somente encomenda</h3>}
-            <h2>{FormatCoin(data.price)}</h2>
-            <button onClick={openWhatsApp}>
-              <Image
-                src="/icons/whatsapp.svg"
-                alt="whatsapp icon"
-                width={15}
-                height={15}
-                priority
-              />
-              Pedir esse Produto
-            </button>
-            <button onClick={saveProductInBag}>
-              <Image
-                src="/icons/bag.svg"
-                alt="whatsapp icon"
-                width={15}
-                height={15}
-                priority
-              />
-              Adicionar a sacola
-            </button>
-            <div>
-              <RenderStar counter={data.stars} />
-            </div>
-          </div>
-        </>
+        <ModalRoot isOpen={isOpenModal} isClose={closeModal}>
+          <ModalObservations product={data} />
+        </ModalRoot>
       )}
-    </main>
+      <main className={styles.container}>
+        <div className={styles.container_toast}>
+          <ToastContainer
+            position="top-right"
+            autoClose={1000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
+        </div>
+        {data != undefined && (
+          <>
+            <div
+              className={styles.image}
+              style={{ backgroundImage: `url(${data.image})` }}
+            >
+              <Image
+                src={data.image}
+                alt="product image"
+                width={430}
+                height={430}
+                priority
+              />
+            </div>
+            <div className={styles.info}>
+              <h1>{data.name}</h1>
+              <p>{data.description}</p>
+              {order_only && <h3> Somente encomenda</h3>}
+              <h2>{FormatCoin(data.price)}</h2>
+              <h4 onClick={openModalObs}>Adicionar observação</h4>
+              <button onClick={openWhatsApp}>
+                <Image
+                  src="/icons/whatsapp.svg"
+                  alt="whatsapp icon"
+                  width={15}
+                  height={15}
+                  priority
+                />
+                Pedir esse Produto
+              </button>
+              <button onClick={saveProductInBag}>
+                <Image
+                  src="/icons/bag.svg"
+                  alt="whatsapp icon"
+                  width={15}
+                  height={15}
+                  priority
+                />
+                Adicionar a sacola
+              </button>
+              <div>
+                <RenderStar counter={data.stars} />
+              </div>
+            </div>
+          </>
+        )}
+      </main>
+    </>
   )
 }
