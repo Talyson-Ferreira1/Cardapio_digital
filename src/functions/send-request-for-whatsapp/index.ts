@@ -5,23 +5,34 @@ import { getTotalPrices } from '../get-total-price-in-bag-shopping'
 export async function sendRequestByWhatsapp() {
   let getBagShoppingInLocStorage = localStorage.getItem('Shopping cart')
   let getAllProductsInLocStorage = sessionStorage.getItem('All products')
+  let getAllObservationsOfProducts = localStorage.getItem('Product Description')
   let message = '*Olá! Gostaria de fazer um pedido*.\n \n'
   let totalPrice = getTotalPrices()
 
-  if (getBagShoppingInLocStorage && getAllProductsInLocStorage) {
+  if (
+    getBagShoppingInLocStorage &&
+    getAllProductsInLocStorage &&
+    getAllObservationsOfProducts
+  ) {
     let BagProducts = JSON.parse(getBagShoppingInLocStorage)
     let AllProducts = JSON.parse(getAllProductsInLocStorage)
+    let observation = JSON.parse(getAllObservationsOfProducts)
 
     for (let product in BagProducts) {
       const quantity = BagProducts[product]
       const productName = AllProducts[product].name
       const productDescription = AllProducts[product].description
       const productPrice = AllProducts[product].price
+      const productObservation = observation[product]
       const totalProductprice = productPrice * quantity
 
-      message += ` *${quantity}* x - *${productName}*: ${FormatCoin(
+      message += ` _*${quantity}*_ x - _*${productName}*_ : ${FormatCoin(
         totalProductprice,
-      )}   \n (${productDescription})\n \n`
+      )}   \n (${productDescription})\n  ${
+        productObservation != undefined && productObservation != ''
+          ? 'Observação: ' + productObservation
+          : ''
+      } \n \n`
     }
   }
 

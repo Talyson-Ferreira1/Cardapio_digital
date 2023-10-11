@@ -31,6 +31,7 @@ type ProductProps = {
 export default function ProductDetails({ params }: { params: { id: string } }) {
   const [data, setData] = useState<ProductProps>()
   const [isOpenModal, setIsOpenModal] = useState(false)
+  const [productObservation, setProductObservation] = useState('')
 
   let order_only = data?.order_only
   const router = useRouter()
@@ -43,6 +44,19 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
     dataInStorage === null
       ? router.back()
       : setData(JSON.parse(dataInStorage)[params.id])
+  }
+
+  const getObservationProduct = () => {
+    const dataInStorage = localStorage.getItem('Product Description')
+
+    if (dataInStorage != null) {
+      let observations = JSON.parse(dataInStorage)
+      let productObservation = observations[params.id]
+
+      if (productObservation != undefined) {
+        setProductObservation(productObservation)
+      }
+    }
   }
 
   const openModalObs = () => {
@@ -66,9 +80,20 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
     }
 
     if (data) {
+      let observationProduct = ''
+      let getAllObservationsOfProducts = localStorage.getItem(
+        'Product Description',
+      )
+
+      if (getAllObservationsOfProducts) {
+        let observation = JSON.parse(getAllObservationsOfProducts)
+        observationProduct = observation[data.id]
+      }
       const message = `Olá! Gostaria de fazer um pedido. \n \n *1 X* - *${data?.name}* : R$: ${FormatCoin(
         data.price,
-      )} \n (${data?.description}).`
+      )} \n (${data?.description}) \n ${
+        observationProduct != '' ? observationProduct : ''
+      }\n\n.`
 
       const phoneNumber = '5588993707881'
       const encodedMessage = encodeURIComponent(message)
@@ -79,6 +104,7 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     getDataInCache()
+    getObservationProduct()
 
     window.scrollTo({
       top: document.documentElement.scrollHeight,
@@ -88,13 +114,14 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
 
   const closeModal = () => {
     setIsOpenModal(false)
+    getObservationProduct()
   }
 
   return (
     <>
       {data != undefined && (
         <ModalRoot isOpen={isOpenModal} isClose={closeModal}>
-          <ModalObservations product={data} />
+          <ModalObservations product={data} isClose={closeModal} />
         </ModalRoot>
       )}
       <main className={styles.container}>
@@ -131,7 +158,16 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
               <p>{data.description}</p>
               {order_only && <h3> Somente encomenda</h3>}
               <h2>{FormatCoin(data.price)}</h2>
-              <h4 onClick={openModalObs}>Adicionar observação</h4>
+              <h4 onClick={openModalObs}>
+                {productObservation != undefined && productObservation != '' ? (
+                  productObservation
+                ) : (
+                  <span>
+                    <strong>Adicione uma observação </strong> ex: retirar a
+                    cebola
+                  </span>
+                )}
+              </h4>
               <button onClick={openWhatsApp}>
                 <Image
                   src="/icons/whatsapp.svg"

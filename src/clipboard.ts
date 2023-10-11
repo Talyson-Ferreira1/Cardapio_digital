@@ -1,5 +1,9 @@
 /*
- * todo: Modificar a função de enviar mensagens para o whatsapp e enviar as observações
+ * todo:  colocar a sacola no product details
+ * criar uma tela de avaliação
+ * criar uma tela de reportar erros
+ * retirar espaços no inicio e final ao cadastrar os produtos
+ * adicionar observações ao poduto no carrinho.
  * Todo: Resgatar a localização do usuário.
  */
 
